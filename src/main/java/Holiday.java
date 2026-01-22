@@ -15,21 +15,25 @@ public class Holiday {
         List<Item> lst = new ArrayList<>();
         while(true){
             message = scanner.nextLine();
+            String[] command = message.split(" ");
 
-            if(message.toLowerCase().equals("bye")) {
+            if(command[0].toLowerCase().equals("bye")) {
                 break;
-            } else if(message.toLowerCase().equals("list")) {
+            } else if(command[0].toLowerCase().equals("list")) {
+                listOut(lst);
+            } else if (command[0].toLowerCase().equals("mark")) {
+                mark(lst, Integer.parseInt(command[1]));
                 listOut(lst);
             } else {
-                lst.add(new Item(message));
-                System.out.println(
-                        "\t--------------------------------------------\n"
-                        + "\t"
-                        + "added: "
-                        + message
-                        + "\n"
-                        + "\t--------------------------------------------\n"
-                );
+                    lst.add(new Item(message));
+                    System.out.println(
+                            "\t--------------------------------------------\n"
+                                    + "\t"
+                                    + "added: "
+                                    + message
+                                    + "\n"
+                                    + "\t--------------------------------------------\n"
+                    );
             }
 
         }
@@ -39,6 +43,7 @@ public class Holiday {
                 + "\t--------------------------------------------\n"
         );
     }
+
     public static void listOut(List<Item> lst) {
         Iterator<Item> iList = lst.iterator();
         int n = 1;
@@ -51,5 +56,13 @@ public class Holiday {
             n++;
         }
         System.out.println("\t--------------------------------------------\n");
+    }
+
+    public static void mark(List<Item> iList, int index) {
+        iList.get(index - 1).setDone();
+    }
+
+    public static void unmark(List<Item> iList, int index) {
+        iList.get(index - 1).setUndone();
     }
 }
