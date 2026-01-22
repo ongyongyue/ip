@@ -1,6 +1,8 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Holiday {
     public static void main(String[] args) {
@@ -13,22 +15,24 @@ public class Holiday {
         Scanner scanner  = new Scanner(System.in);
         String message = " ";
         List<String> lst = new ArrayList<>();
-        boolean isBye = true;
         while(true){
             message = scanner.nextLine();
 
-            isBye = message.toLowerCase().equals("bye");
-
-            if(isBye) break;
-            lst.add(message);
-            System.out.println(
-                    "\t--------------------------------------------\n"
-                    + "\t"
-                    + "added: "
-                    + message
-                    + "\n"
-                    + "\t--------------------------------------------\n"
-            );
+            if(message.toLowerCase().equals("bye")) {
+                break;
+            } else if(message.toLowerCase().equals("list")) {
+                listOut(lst);
+            } else {
+                lst.add(message);
+                System.out.println(
+                        "\t--------------------------------------------\n"
+                        + "\t"
+                        + "added: "
+                        + message
+                        + "\n"
+                        + "\t--------------------------------------------\n"
+                );
+            }
 
         }
         System.out.println(
@@ -36,5 +40,15 @@ public class Holiday {
                 + "\tBye! See you again!\n"
                 + "\t--------------------------------------------\n"
         );
+    }
+    public static void listOut(List<String> lst) {
+        Iterator<String> iList = lst.iterator();
+        int n = 1;
+        System.out.println("\t--------------------------------------------\n");
+        while(iList.hasNext()) {
+            System.out.printf("\t%d. %s\n",n,iList.next());
+            n++;
+        }
+        System.out.println("\t--------------------------------------------\n");
     }
 }
