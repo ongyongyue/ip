@@ -23,8 +23,10 @@ public class Holiday {
                 listOut(lst);
             } else if (command[0].toLowerCase().equals("mark")) {
                 mark(lst, Integer.parseInt(command[1]));
-                listOut(lst);
-            } else {
+            } else if (command[0].toLowerCase().equals("unmark")) {
+                unmark(lst, Integer.parseInt(command[1]));
+            }
+            else {
                     lst.add(new Item(message));
                     System.out.println(
                             "\t--------------------------------------------\n"
@@ -59,10 +61,20 @@ public class Holiday {
     }
 
     public static void mark(List<Item> iList, int index) {
-        iList.get(index - 1).setDone();
+        Item currentItem = iList.get(index - 1);
+        currentItem.setDone();
+        System.out.println("\t--------------------------------------------\n"
+                + "\tNice! I've marked this task as done:");
+        System.out.printf("\t [X] %s", currentItem.getName());
+        System.out.println("\t--------------------------------------------\n");
     }
 
     public static void unmark(List<Item> iList, int index) {
-        iList.get(index - 1).setUndone();
+        Item currentItem = iList.get(index - 1);
+        currentItem.setUndone();
+        System.out.println("\t--------------------------------------------\n"
+                + "\t OK, I've marked this task as not done yet:");
+        System.out.printf("\t [ ] %s", currentItem.getName());
+        System.out.println("\t--------------------------------------------\n");
     }
 }
