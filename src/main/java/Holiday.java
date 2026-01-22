@@ -3,10 +3,8 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 public class Holiday {
     public static void main(String[] args) {
-
         String greeting = "\t--------------------------------------------\n"
                 + "\tHello! I'm Holiday\n"
                 + "\tHow can I help you?\n"
