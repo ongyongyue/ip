@@ -12,7 +12,7 @@ public class Holiday {
         System.out.println(greeting);
         Scanner scanner  = new Scanner(System.in);
         String message = " ";
-        List<String> lst = new ArrayList<>();
+        List<Item> lst = new ArrayList<>();
         while(true){
             message = scanner.nextLine();
 
@@ -21,7 +21,7 @@ public class Holiday {
             } else if(message.toLowerCase().equals("list")) {
                 listOut(lst);
             } else {
-                lst.add(message);
+                lst.add(new Item(message));
                 System.out.println(
                         "\t--------------------------------------------\n"
                         + "\t"
@@ -42,7 +42,8 @@ public class Holiday {
     public static void listOut(List<Item> lst) {
         Iterator<Item> iList = lst.iterator();
         int n = 1;
-        System.out.println("\t--------------------------------------------\n");
+        System.out.println("\t--------------------------------------------\n"
+                + "\tHere are the tasks in your list: \n");
         while(iList.hasNext()) {
             Item currentItem = iList.next();
             String checkBox = currentItem.getIsDone() ? "[X]" : "[ ]";
