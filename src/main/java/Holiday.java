@@ -1,5 +1,6 @@
-import java.util.Locale;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Holiday {
     public static void main(String[] args) {
@@ -11,6 +12,7 @@ public class Holiday {
         System.out.println(greeting);
         Scanner scanner  = new Scanner(System.in);
         String message = " ";
+        List<String> lst = new ArrayList<>();
         boolean isBye = true;
         while(true){
             message = scanner.nextLine();
@@ -18,10 +20,11 @@ public class Holiday {
             isBye = message.toLowerCase().equals("bye");
 
             if(isBye) break;
-
+            lst.add(message);
             System.out.println(
                     "\t--------------------------------------------\n"
                     + "\t"
+                    + "added: "
                     + message
                     + "\n"
                     + "\t--------------------------------------------\n"
