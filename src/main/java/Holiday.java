@@ -39,12 +39,14 @@ public class Holiday {
                 + "\t--------------------------------------------\n"
         );
     }
-    public static void listOut(List<String> lst) {
-        Iterator<String> iList = lst.iterator();
+    public static void listOut(List<Item> lst) {
+        Iterator<Item> iList = lst.iterator();
         int n = 1;
         System.out.println("\t--------------------------------------------\n");
         while(iList.hasNext()) {
-            System.out.printf("\t%d. %s\n",n,iList.next());
+            Item currentItem = iList.next();
+            String checkBox = currentItem.getIsDone() ? "[X]" : "[ ]";
+            System.out.printf("\t%d.%s %s\n",n,checkBox,currentItem.getName());
             n++;
         }
         System.out.println("\t--------------------------------------------\n");
