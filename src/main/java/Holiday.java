@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ public class Holiday {
         System.out.println(greeting);
         Scanner scanner  = new Scanner(System.in);
         String message = " ";
-        List<Item> lst = new ArrayList<>();
+        List<Task> lst = new ArrayList<>();
         while(true){
             message = scanner.nextLine();
             String[] command = message.split(" ");
@@ -27,7 +26,7 @@ public class Holiday {
                 unmark(lst, Integer.parseInt(command[1]));
             }
             else {
-                    lst.add(new Item(message));
+                    lst.add(new Task(message));
                     System.out.println(
                             "\t--------------------------------------------\n"
                                     + "\t"
@@ -46,35 +45,34 @@ public class Holiday {
         );
     }
 
-    public static void listOut(List<Item> lst) {
-        Iterator<Item> iList = lst.iterator();
+    public static void listOut(List<Task> lst) {
+        Iterator<Task> iList = lst.iterator();
         int n = 1;
         System.out.println("\t--------------------------------------------\n"
                 + "\tHere are the tasks in your list: \n");
         while(iList.hasNext()) {
-            Item currentItem = iList.next();
-            String checkBox = currentItem.getIsDone() ? "[X]" : "[ ]";
-            System.out.printf("\t%d.%s %s\n",n,checkBox,currentItem.getName());
+            Task currentTask = iList.next();
+            System.out.printf("\t%d.%s\n",n, currentTask.toString());
             n++;
         }
         System.out.println("\t--------------------------------------------\n");
     }
 
-    public static void mark(List<Item> iList, int index) {
-        Item currentItem = iList.get(index - 1);
-        currentItem.setDone();
+    public static void mark(List<Task> iList, int index) {
+        Task currentTask = iList.get(index - 1);
+        currentTask.setDone();
         System.out.println("\t--------------------------------------------\n"
                 + "\tNice! I've marked this task as done:");
-        System.out.printf("\t [X] %s", currentItem.getName());
+        System.out.printf("\t %s\n", currentTask.toString());
         System.out.println("\t--------------------------------------------\n");
     }
 
-    public static void unmark(List<Item> iList, int index) {
-        Item currentItem = iList.get(index - 1);
-        currentItem.setUndone();
+    public static void unmark(List<Task> iList, int index) {
+        Task currentTask = iList.get(index - 1);
+        currentTask.setUndone();
         System.out.println("\t--------------------------------------------\n"
                 + "\t OK, I've marked this task as not done yet:");
-        System.out.printf("\t [ ] %s", currentItem.getName());
+        System.out.printf("\t %s\n", currentTask.toString());
         System.out.println("\t--------------------------------------------\n");
     }
 }
