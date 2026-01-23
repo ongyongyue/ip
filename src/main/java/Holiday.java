@@ -3,6 +3,16 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 public class Holiday {
+    public enum CommandType {
+        LIST,
+        MARK,
+        UNMARK,
+        TODO,
+        DEADLINE,
+        EVENT,
+        DELETE,
+        BYE;
+    }
     public static void main(String[] args) throws HolidayException{
         String greeting = "\t--------------------------------------------\n"
                 + "\tHello! I'm Holiday\n"
@@ -18,19 +28,7 @@ public class Holiday {
             try {
                 if (args == null) {
                     throw new HolidayException("No blank entries");
-                } else if (
-                        !(
-                                command[0].toLowerCase().equals("list")
-                                        || command[0].toLowerCase().equals("list")
-                                        || command[0].toLowerCase().equals("mark")
-                                        || command[0].toLowerCase().equals("unmark")
-                                        || command[0].toLowerCase().equals("todo")
-                                        || command[0].toLowerCase().equals("deadline")
-                                        || command[0].toLowerCase().equals("event")
-                                        || command[0].toLowerCase().equals("bye")
-                                        || command[0].toLowerCase().equals("delete")
-                        )
-                ) {
+                } else if (!isValidCommand(command[0])) {
                     throw new HolidayException("Sorry, I don't recognise this command");
                 } else if (!command[0].toLowerCase().equals("bye")
                         && !command[0].toLowerCase().equals("list")
@@ -168,6 +166,15 @@ public class Holiday {
                 iList.size()
                 );
         System.out.println("\t--------------------------------------------");
+    }
+
+    public static boolean isValidCommand(String input) {
+        for (CommandType type : CommandType.values()) {
+            if (type.name().equalsIgnoreCase(input)) {
+            return true;
+            }
+        }
+        return false;
     }
 
 }
