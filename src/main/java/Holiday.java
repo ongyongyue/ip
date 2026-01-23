@@ -12,7 +12,7 @@ public class Holiday {
         Scanner scanner  = new Scanner(System.in);
         String message = " ";
         List<Task> lst = new ArrayList<>();
-        while(true){
+        while(true) {
             message = scanner.nextLine();
             String[] command = message.split(" ", 2);
             try {
@@ -20,99 +20,100 @@ public class Holiday {
                     throw new HolidayException("No blank entries");
                 } else if (
                         !(
-                            command[0].toLowerCase().equals("list")
-                            || command[0].toLowerCase().equals("list")
-                            || command[0].toLowerCase().equals("mark")
-                            || command[0].toLowerCase().equals("unmark")
-                            || command[0].toLowerCase().equals("todo")
-                            || command[0].toLowerCase().equals("deadline")
-                            || command[0].toLowerCase().equals("event")
+                                command[0].toLowerCase().equals("list")
+                                        || command[0].toLowerCase().equals("list")
+                                        || command[0].toLowerCase().equals("mark")
+                                        || command[0].toLowerCase().equals("unmark")
+                                        || command[0].toLowerCase().equals("todo")
+                                        || command[0].toLowerCase().equals("deadline")
+                                        || command[0].toLowerCase().equals("event")
+                                        || command[0].toLowerCase().equals("bye")
+                                        || command[0].toLowerCase().equals("delete")
                         )
-                )
-                {
+                ) {
                     throw new HolidayException("Sorry, I don't recognise this command");
-                } else if (command.length < 2) {
-                    throw new HolidayException("Description can't be blank");
-                }
+                } else if (!command[0].toLowerCase().equals("bye")
+                        && !command[0].toLowerCase().equals("list")
+                        && command.length < 2) throw new HolidayException("Description can't be blank");
+                    if (command[0].toLowerCase().equals("bye")) {
+                        break;
+                    } else if (command[0].toLowerCase().equals("list")) {
+                        listOut(lst);
+                    } else if (command[0].toLowerCase().equals("mark")) {
+                        mark(lst, Integer.parseInt(command[1]));
+                    } else if (command[0].toLowerCase().equals("unmark")) {
+                        unmark(lst, Integer.parseInt(command[1]));
+                    } else if (command[0].toLowerCase().equals("todo")) {
+                        ToDos currentTask = new ToDos(command[1]);
+                        lst.add(currentTask);
+                        System.out.println(
+                                "\t--------------------------------------------\n"
+                                        + "\tGot it. I've added this task:\n"
+                                        + "\t"
+                                        + String.format(
+                                        "  %s\n\tNow you have %d Tasks in the list\n",
+                                        currentTask.toString(),
+                                        lst.size())
+                                        + "\t--------------------------------------------"
+                        );
+                    } else if (command[0].toLowerCase().equals("deadline")) {
+                        String[] segment = command[1].split("/");
+                        if (segment.length < 2) throw new HolidayException("Improper Command format");
+                        String[] dueBy = segment[1].split(" ", 2);
+                        Deadlines currentTask = new Deadlines(segment[0], dueBy[1]);
+                        lst.add(currentTask);
+                        System.out.println(
+                                "\t--------------------------------------------\n"
+                                        + "\tGot it. I've added this task:\n"
+                                        + "\t"
+                                        + String.format(
+                                        "  %s\n\tNow you have %d Tasks in the list\n",
+                                        currentTask.toString(),
+                                        lst.size())
+                                        + "\t--------------------------------------------"
+                        );
+
+                    } else if (command[0].toLowerCase().equals("event")) {
+                        String[] segment = command[1].split("/");
+                        if (segment.length < 2) throw new HolidayException("Improper Command format");
+                        String[] start = segment[1].split(" ", 2);
+                        String[] end = segment[2].split(" ", 2);
+
+                        Events currentTask = new Events(segment[0], start[1], end[1]);
+                        lst.add(currentTask);
+                        System.out.println(
+                                "\t--------------------------------------------\n"
+                                        + "\tGot it. I've added this task:\n"
+                                        + "\t"
+                                        + String.format(
+                                        "  %s\n\tNow you have %d Tasks in the list\n",
+                                        currentTask.toString(),
+                                        lst.size())
+                                        + "\t--------------------------------------------"
+                        );
+
+                    } else {
+                        lst.add(new Task(message));
+                        System.out.println(
+                                "\t--------------------------------------------\n"
+                                        + "\t"
+                                        + "added: "
+                                        + message
+                                        + "\n"
+                                        + "\t--------------------------------------------\n"
+                        );
+                    }
+
+
             } catch (HolidayException e) {
-                    System.out.println(
-                            "\t--------------------------------------------\n"
+            System.out.println(
+                    "\t--------------------------------------------\n"
                             + "\t"
                             + e.getMessage()
                             + "\n"
                             + "\t--------------------------------------------"
-                    );
-                    continue;
-
+            );
             }
-
-            if(command[0].toLowerCase().equals("bye")) {
-                break;
-            } else if(command[0].toLowerCase().equals("list")) {
-                listOut(lst);
-            } else if (command[0].toLowerCase().equals("mark")) {
-                mark(lst, Integer.parseInt(command[1]));
-            } else if (command[0].toLowerCase().equals("unmark")) {
-                unmark(lst, Integer.parseInt(command[1]));
-            } else if (command[0].toLowerCase().equals("todo")) {
-                ToDos currentTask = new ToDos(command[1]);
-                lst.add(currentTask);
-                System.out.println(
-                        "\t--------------------------------------------\n"
-                                + "\tGot it. I've added this task:\n"
-                                + "\t"
-                                + String.format(
-                                    "  %s\n\tNow you have %d Tasks in the list\n",
-                                    currentTask.toString(),
-                                    lst.size())
-                                + "\t--------------------------------------------"
-                );
-            } else if (command[0].toLowerCase().equals("deadline")) {
-                String[] segment = command[1].split("/");
-                String[] dueBy = segment[1].split(" ", 2);
-                Deadlines currentTask = new Deadlines(segment[0], dueBy[1]);
-                lst.add(currentTask);
-                System.out.println(
-                        "\t--------------------------------------------\n"
-                                + "\tGot it. I've added this task:\n"
-                                + "\t"
-                                + String.format(
-                                "  %s\n\tNow you have %d Tasks in the list\n",
-                                currentTask.toString(),
-                                lst.size())
-                                + "\t--------------------------------------------"
-                );
-
-            } else if (command[0].toLowerCase().equals("event")) {
-                String[] segment = command[1].split("/");
-                String[] start = segment[1].split(" ", 2);
-                String[] end = segment[2].split(" ", 2);
-
-                Events currentTask = new Events(segment[0], start[1], end[1]);
-                lst.add(currentTask);
-                System.out.println(
-                        "\t--------------------------------------------\n"
-                                + "\tGot it. I've added this task:\n"
-                                + "\t"
-                                + String.format(
-                                "  %s\n\tNow you have %d Tasks in the list\n",
-                                currentTask.toString(),
-                                lst.size())
-                                + "\t--------------------------------------------"
-                );
-
-            }else {
-                    lst.add(new Task(message));
-                    System.out.println(
-                            "\t--------------------------------------------\n"
-                                    + "\t"
-                                    + "added: "
-                                    + message
-                                    + "\n"
-                                    + "\t--------------------------------------------\n"
-                    );
-            }
-
         }
         System.out.println(
                 "\t--------------------------------------------\n"
@@ -151,4 +152,13 @@ public class Holiday {
         System.out.printf("\t %s\n", currentTask.toString());
         System.out.println("\t--------------------------------------------");
     }
+
+    public static void delete(List<Task> iList, int index) {
+        Task removedTask = iList.remove(index - 1);
+        System.out.println("\t--------------------------------------------\n"
+                + "\t Noted. I've removed this task:");
+        System.out.printf("\t %s\n", removedTask.toString());
+        System.out.println("\t--------------------------------------------");
+    }
+
 }
