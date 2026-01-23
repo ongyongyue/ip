@@ -14,7 +14,7 @@ public class Holiday {
         List<Task> lst = new ArrayList<>();
         while(true){
             message = scanner.nextLine();
-            String[] command = message.split(" ");
+            String[] command = message.split(" ", 2);
 
             if(command[0].toLowerCase().equals("bye")) {
                 break;
@@ -24,8 +24,9 @@ public class Holiday {
                 mark(lst, Integer.parseInt(command[1]));
             } else if (command[0].toLowerCase().equals("unmark")) {
                 unmark(lst, Integer.parseInt(command[1]));
-            }
-            else {
+            } else if (command[0].toLowerCase().equals("todo")) {
+                lst.add(new ToDos(command[1]));
+            } else {
                     lst.add(new Task(message));
                     System.out.println(
                             "\t--------------------------------------------\n"
