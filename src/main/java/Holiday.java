@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 public class Holiday {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws HolidayException{
         String greeting = "\t--------------------------------------------\n"
                 + "\tHello! I'm Holiday\n"
                 + "\tHow can I help you?\n"
@@ -15,6 +15,36 @@ public class Holiday {
         while(true){
             message = scanner.nextLine();
             String[] command = message.split(" ", 2);
+            try {
+                if (args == null) {
+                    throw new HolidayException("No blank entries");
+                } else if (
+                        !(
+                            command[0].toLowerCase().equals("list")
+                            || command[0].toLowerCase().equals("list")
+                            || command[0].toLowerCase().equals("mark")
+                            || command[0].toLowerCase().equals("unmark")
+                            || command[0].toLowerCase().equals("todo")
+                            || command[0].toLowerCase().equals("deadline")
+                            || command[0].toLowerCase().equals("event")
+                        )
+                )
+                {
+                    throw new HolidayException("Sorry, I don't recognise this command");
+                } else if (command.length < 2) {
+                    throw new HolidayException("Description can't be blank");
+                }
+            } catch (HolidayException e) {
+                    System.out.println(
+                            "\t--------------------------------------------\n"
+                            + "\t"
+                            + e.getMessage()
+                            + "\n"
+                            + "\t--------------------------------------------"
+                    );
+                    continue;
+
+            }
 
             if(command[0].toLowerCase().equals("bye")) {
                 break;
