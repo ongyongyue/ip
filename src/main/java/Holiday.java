@@ -34,6 +34,7 @@ public class Holiday {
                     throw new HolidayException("Sorry, I don't recognise this command");
                 } else if (!command[0].toLowerCase().equals("bye")
                         && !command[0].toLowerCase().equals("list")
+                        && !command[0].toLowerCase().equals("delete")
                         && command.length < 2) throw new HolidayException("Description can't be blank");
                     if (command[0].toLowerCase().equals("bye")) {
                         break;
@@ -91,6 +92,11 @@ public class Holiday {
                                         lst.size())
                                         + "\t--------------------------------------------"
                         );
+
+                    } else if (command[0].toLowerCase().equals("delete")) {
+                        if (lst.size() == 0) throw new HolidayException("List is empty!!");
+                        if (command.length < 2) throw new HolidayException("Improper Command format");
+                        delete(lst, Integer.parseInt(command[1]));
 
                     } else {
                         lst.add(new Task(message));
@@ -157,7 +163,10 @@ public class Holiday {
         Task removedTask = iList.remove(index - 1);
         System.out.println("\t--------------------------------------------\n"
                 + "\t Noted. I've removed this task:");
-        System.out.printf("\t %s\n", removedTask.toString());
+        System.out.printf("\t %s\n\tNow you have %d Tasks Remaining",
+                removedTask.toString(),
+                iList.size()
+                );
         System.out.println("\t--------------------------------------------");
     }
 
