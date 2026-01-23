@@ -19,10 +19,13 @@
 	Now you have 3 Tasks in the list
 	--------------------------------------------
 	--------------------------------------------
-	Here are the tasks in your list:
-	1.[T][ ] Walk dog
-	2.[D][ ] find red herring  (by: Sunday 3pm)
-	3.[E][ ] wild goose chase  (from: 5pm friday  to: 5pm sunday)
+	Description can't be blank
+	--------------------------------------------
+	--------------------------------------------
+	Sorry, I don't recognise this command
+	--------------------------------------------
+	--------------------------------------------
+	Description can't be blank
 	--------------------------------------------
 	--------------------------------------------
 	Nice! I've marked this task as done:
@@ -33,10 +36,7 @@
 	 [D][ ] find red herring  (by: Sunday 3pm)
 	--------------------------------------------
 	--------------------------------------------
-	Here are the tasks in your list:
-	1.[T][ ] Walk dog
-	2.[D][ ] find red herring  (by: Sunday 3pm)
-	3.[E][ ] wild goose chase  (from: 5pm friday  to: 5pm sunday)
+	Description can't be blank
 	--------------------------------------------
 	--------------------------------------------
 	Bye! See you again!
