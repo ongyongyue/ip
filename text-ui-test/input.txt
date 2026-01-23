@@ -1,0 +1,8 @@
+todo Walk dog
+deadline find red herring /by Sunday 3pm
+Event wild goose chase /from 5pm friday /to 5pm sunday
+list
+mark 2
+unmark 2
+list
+bye

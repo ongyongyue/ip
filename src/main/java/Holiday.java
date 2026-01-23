@@ -95,7 +95,7 @@ public class Holiday {
         Iterator<Task> iList = lst.iterator();
         int n = 1;
         System.out.println("\t--------------------------------------------\n"
-                + "\tHere are the tasks in your list: ");
+                + "\tHere are the tasks in your list:");
         while(iList.hasNext()) {
             Task currentTask = iList.next();
             System.out.printf("\t%d.%s\n",n, currentTask.toString());

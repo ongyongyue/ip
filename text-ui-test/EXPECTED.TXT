@@ -1,7 +1,43 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+	--------------------------------------------
+	Hello! I'm Holiday
+	How can I help you?
+	--------------------------------------------
 
+	--------------------------------------------
+	Got it. I've added this task:
+	  [T][ ] Walk dog
+	Now you have 1 Tasks in the list
+	--------------------------------------------
+	--------------------------------------------
+	Got it. I've added this task:
+	  [D][ ] find red herring  (by: Sunday 3pm)
+	Now you have 2 Tasks in the list
+	--------------------------------------------
+	--------------------------------------------
+	Got it. I've added this task:
+	  [E][ ] wild goose chase  (from: 5pm friday  to: 5pm sunday)
+	Now you have 3 Tasks in the list
+	--------------------------------------------
+	--------------------------------------------
+	Here are the tasks in your list:
+	1.[T][ ] Walk dog
+	2.[D][ ] find red herring  (by: Sunday 3pm)
+	3.[E][ ] wild goose chase  (from: 5pm friday  to: 5pm sunday)
+	--------------------------------------------
+	--------------------------------------------
+	Nice! I've marked this task as done:
+	 [D][X] find red herring  (by: Sunday 3pm)
+	--------------------------------------------
+	--------------------------------------------
+	 OK, I've marked this task as not done yet:
+	 [D][ ] find red herring  (by: Sunday 3pm)
+	--------------------------------------------
+	--------------------------------------------
+	Here are the tasks in your list:
+	1.[T][ ] Walk dog
+	2.[D][ ] find red herring  (by: Sunday 3pm)
+	3.[E][ ] wild goose chase  (from: 5pm friday  to: 5pm sunday)
+	--------------------------------------------
+	--------------------------------------------
+	Bye! See you again!
+	--------------------------------------------
