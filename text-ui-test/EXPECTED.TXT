@@ -10,7 +10,7 @@
 	--------------------------------------------
 	--------------------------------------------
 	Got it. I've added this task:
-	  [D][ ] find red herring  (by: Sunday 3pm)
+	  [D][ ] Investigate red herring  (by: Sunday 3pm)
 	Now you have 2 Tasks in the list
 	--------------------------------------------
 	--------------------------------------------
@@ -22,21 +22,39 @@
 	Description can't be blank
 	--------------------------------------------
 	--------------------------------------------
+	Improper Command format
+	--------------------------------------------
+	--------------------------------------------
 	Sorry, I don't recognise this command
 	--------------------------------------------
 	--------------------------------------------
-	Description can't be blank
+	Here are the tasks in your list:
+	1.[T][ ] Walk dog
+	2.[D][ ] Investigate red herring  (by: Sunday 3pm)
+	3.[E][ ] wild goose chase  (from: 5pm friday  to: 5pm sunday)
 	--------------------------------------------
 	--------------------------------------------
 	Nice! I've marked this task as done:
-	 [D][X] find red herring  (by: Sunday 3pm)
+	 [D][X] Investigate red herring  (by: Sunday 3pm)
 	--------------------------------------------
 	--------------------------------------------
 	 OK, I've marked this task as not done yet:
-	 [D][ ] find red herring  (by: Sunday 3pm)
+	 [D][ ] Investigate red herring  (by: Sunday 3pm)
 	--------------------------------------------
 	--------------------------------------------
-	Description can't be blank
+	Here are the tasks in your list:
+	1.[T][ ] Walk dog
+	2.[D][ ] Investigate red herring  (by: Sunday 3pm)
+	3.[E][ ] wild goose chase  (from: 5pm friday  to: 5pm sunday)
+	--------------------------------------------
+	--------------------------------------------
+	 Noted. I've removed this task:
+	 [D][ ] Investigate red herring  (by: Sunday 3pm)
+	Now you have 2 Tasks Remaining	--------------------------------------------
+	--------------------------------------------
+	Here are the tasks in your list:
+	1.[T][ ] Walk dog
+	2.[E][ ] wild goose chase  (from: 5pm friday  to: 5pm sunday)
 	--------------------------------------------
 	--------------------------------------------
 	Bye! See you again!
