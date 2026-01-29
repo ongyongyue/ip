@@ -145,14 +145,20 @@ public class Holiday {
     public static void listOut(List<Task> lst) {
         Iterator<Task> iList = lst.iterator();
         int n = 1;
-        System.out.println("\t--------------------------------------------\n"
-                + "\tHere are the tasks in your list:");
-        while(iList.hasNext()) {
-            Task currentTask = iList.next();
-            System.out.printf("\t%d.%s\n",n, currentTask.toString());
-            n++;
+        if (lst.size() > 0) {
+            System.out.println("\t--------------------------------------------\n"
+                    + "\tHere are the tasks in your list:");
+            while(iList.hasNext()) {
+                Task currentTask = iList.next();
+                System.out.printf("\t%d.%s\n",n, currentTask.toString());
+                n++;
+            }
+            System.out.println("\t--------------------------------------------");
+        } else {
+            System.out.println("\t--------------------------------------------\n"
+                    + "\tThere are no Tasks in the list");
+            System.out.println("\t--------------------------------------------");
         }
-        System.out.println("\t--------------------------------------------");
     }
 
     public static void mark(List<Task> iList, int index) {
