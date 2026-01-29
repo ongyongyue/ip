@@ -26,5 +26,12 @@ public class Task {
                 this.description
         );
     }
+    /*
+    Function that returns information about Task to be stored in a txt file
+    in a nice format
+     */
+    public String toFileString() {
+        return String.format("%s", description);
+    }
 
 }
