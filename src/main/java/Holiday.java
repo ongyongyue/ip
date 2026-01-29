@@ -22,7 +22,7 @@ public class Holiday {
         DELETE,
         BYE;
     }
-    public static void main(String[] args) throws HolidayException{
+    public static void main(String[] args) throws HolidayException, IOException {
         String greeting = "\t--------------------------------------------\n"
                 + "\tHello! I'm Holiday\n"
                 + "\tHow can I help you?\n"
@@ -30,7 +30,7 @@ public class Holiday {
         System.out.println(greeting);
         Scanner scanner  = new Scanner(System.in);
         String message = " ";
-        List<Task> lst = new ArrayList<>();
+        List<Task> lst = loadTasksFromFile();
         while(true) {
             message = scanner.nextLine();
             String[] command = message.split(" ", 2);
@@ -217,6 +217,29 @@ public class Holiday {
         }
         Files.write(DATA_FILE, lines, StandardCharsets.UTF_8,
                 StandardOpenOption.TRUNCATE_EXISTING);
+    }
+    private static List<Task> loadTasksFromFile() throws IOException {
+        ensureDataFileExists();
+        List<String> lines = Files.readAllLines(DATA_FILE, StandardCharsets.UTF_8);
+
+        List<Task> tasks = new ArrayList<>();
+        for (String line : lines) {
+            if (line.isBlank()) continue;
+            try {
+                String[] parts = line.split(",");
+                if (parts[0].equals("T")) {
+                    tasks.add(new ToDos(parts[1]));
+                } else if (parts[0].equals("D")) {
+                    tasks.add(new Deadlines(parts[1], parts[2]));
+                } else if (parts[0].equals("E")) {
+                    tasks.add(new Events(parts[1], parts[2], parts[3]));
+                }
+            } catch (Exception e) {
+                // corrupted line: skip (stretch goal handled)
+                System.out.println("Skipping corrupted line: " + line);
+            }
+        }
+        return tasks;
     }
 
 
