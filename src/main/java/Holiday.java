@@ -1,3 +1,4 @@
+import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -127,11 +128,18 @@ public class Holiday {
             );
             }
         }
-        System.out.println(
-                "\t--------------------------------------------\n"
-                + "\tBye! See you again!\n"
-                + "\t--------------------------------------------"
-        );
+        try {
+            saveTasksToFile(lst);
+        } catch (IOException e) {
+            System.out.print(e.getMessage());
+        } finally {
+            System.out.println(
+                    "\t--------------------------------------------\n"
+                            + "\tBye! See you again!\n"
+                            + "\t--------------------------------------------"
+            );
+        }
+
     }
 
     public static void listOut(List<Task> lst) {
@@ -184,6 +192,7 @@ public class Holiday {
         }
         return false;
     }
+
     /*
     Check if the data file exits, if it doesn't create the file and data directory
      */
@@ -196,6 +205,21 @@ public class Holiday {
             Files.createFile(DATA_FILE);
         }
     }
+
+    /*
+    Turn Tasks into txt form and save it into a txt file
+     */
+    private static void saveTasksToFile(List<Task> tasks) throws IOException {
+        ensureDataFileExists();
+        List<String> lines = new ArrayList<>();
+        for (Task t : tasks) {
+            lines.add(t.toFileString()); // you will add this method in Task
+        }
+        Files.write(DATA_FILE, lines, StandardCharsets.UTF_8,
+                StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+
 
 
 }
