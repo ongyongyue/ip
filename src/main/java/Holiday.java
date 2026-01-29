@@ -2,7 +2,15 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
+import java.io.IOException;
+
+
 public class Holiday {
+    private static final Path DATA_FILE = Paths.get("data", "holiday.txt");
     public enum CommandType {
         LIST,
         MARK,
@@ -176,5 +184,18 @@ public class Holiday {
         }
         return false;
     }
+    /*
+    Check if the data file exits, if it doesn't create the file and data directory
+     */
+    private static void ensureDataFileExists() throws IOException {
+        Path dir = DATA_FILE.getParent();
+        if (dir != null && Files.notExists(dir)) {
+            Files.createDirectories(dir);
+        }
+        if (Files.notExists(DATA_FILE)) {
+            Files.createFile(DATA_FILE);
+        }
+    }
+
 
 }
