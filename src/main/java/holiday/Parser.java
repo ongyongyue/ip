@@ -9,6 +9,7 @@ public class Parser {
         DEADLINE,
         EVENT,
         DELETE,
+        FIND,
         BYE;
     }
     /*
@@ -20,7 +21,6 @@ public class Parser {
             throw new HolidayException("Command cannot be blank");
         } else if (!command[0].toLowerCase().equals("bye")
                 && !command[0].toLowerCase().equals("list")
-                && !command[0].toLowerCase().equals("delete")
                 && command.length < 2) throw new HolidayException("Description can't be blank");
         return command;
     }
@@ -58,6 +58,14 @@ public class Parser {
             }
         }
         return false;
+    }
+
+    public static String parseFindKeyword(String input) throws HolidayException {
+        String[] parts = input.split(" ", 2);
+        if (parts.length < 2 || parts[1].isBlank()) {
+            throw new HolidayException("Please provide a keyword to search for.");
+        }
+        return parts[1].trim();
     }
 
 }
