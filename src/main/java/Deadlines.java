@@ -10,7 +10,7 @@ public class Deadlines extends Task {
 
     Deadlines(String description, String doByString) {
         super(description);
-        this.doByDate = LocalDateTime.parse(doByString.trim(), INPUT);;
+        this.doByDate = LocalDateTime.parse(doByString.trim(), INPUT);
     }
 
     @Override
