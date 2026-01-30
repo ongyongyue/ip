@@ -60,12 +60,12 @@ public class Holiday {
 
                 } else if (command[0].equalsIgnoreCase("Find")){
                     String keyword = Parser.parseFindKeyword(message);
-
+                    TaskList matches = new TaskList(lst.find(keyword));
+                    ui.showMatchingTasks(matches);
                 } else {
                     lst.add(new Task(message));
                     ui.showMessage(message);
                 }
-
 
             } catch (HolidayException e) {
             ui.showError(e.getMessage());

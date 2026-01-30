@@ -130,4 +130,26 @@ public class Ui {
         System.out.println("\t--------------------------------------------");
     }
 
+    /*
+    Displays tasks matching the keyword
+     */
+    public void showMatchingTasks(TaskList matches) {
+
+        if (matches.size() > 0) {
+            System.out.println("\t--------------------------------------------");
+            System.out.println("\tHere are the matching tasks in your list:");
+
+            for (int i = 0; i < matches.size(); i++) {
+                System.out.println(" " + (i + 1) + "." + matches.get(i));
+            }
+
+            System.out.println("\t--------------------------------------------");
+        } else {
+            System.out.println("\t--------------------------------------------");
+            System.out.println("\t There are no Tasks Matching this keyword");
+            System.out.println("\t--------------------------------------------");
+        }
+    }
+
+
 }
