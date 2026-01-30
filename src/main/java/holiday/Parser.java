@@ -15,7 +15,10 @@ public class Parser {
         String[] command = fullCommand.trim().split(" ", 2);
         if (command.length == 0 || command[0].isBlank()) {
             throw new HolidayException("Command cannot be blank");
-        }
+        } else if (!command[0].toLowerCase().equals("bye")
+                && !command[0].toLowerCase().equals("list")
+                && !command[0].toLowerCase().equals("delete")
+                && command.length < 2) throw new HolidayException("Description can't be blank");
         return command;
     }
 

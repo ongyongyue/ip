@@ -75,10 +75,12 @@ public class Ui {
     /*
     function to list out items in the list
      */
-    public static void listOut(List<Task> lst) {
+    public static void listOut(List<Task> lst) throws HolidayException {
         Iterator<Task> iList = lst.iterator();
         int n = 1;
-        if (lst.size() > 0) {
+        if (lst.size() == 0) {
+            throw new HolidayException("List is empty!!");
+        } else {
             System.out.println("\t--------------------------------------------\n"
                     + "\tHere are the tasks in your list:");
             while(iList.hasNext()) {
@@ -87,11 +89,8 @@ public class Ui {
                 n++;
             }
             System.out.println("\t--------------------------------------------");
-        } else {
-            System.out.println("\t--------------------------------------------\n"
-                    + "\tThere are no Tasks in the list");
-            System.out.println("\t--------------------------------------------");
         }
+
     }
 
     /*

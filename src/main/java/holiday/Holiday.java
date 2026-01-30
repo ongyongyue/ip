@@ -25,55 +25,49 @@ public class Holiday {
                     throw new HolidayException("No blank entries");
                 } else if (!Parser.isValidCommand(command[0])) {
                     throw new HolidayException("Sorry, I don't recognise this command");
-                } else if (!command[0].toLowerCase().equals("bye")
-                        && !command[0].toLowerCase().equals("list")
-                        && !command[0].toLowerCase().equals("delete")
-                        && command.length < 2) throw new HolidayException("Description can't be blank");
-                    if (command[0].toLowerCase().equals("bye")) {
-                        break;
-                    } else if (command[0].toLowerCase().equals("list")) {
-                        Ui.listOut(lst.getTasks());
-                        if (lst.size() == 0) {
-                            throw new HolidayException("List is empty!!");
-                        }
-                    } else if (command[0].toLowerCase().equals("mark")) {
-                        Ui.mark(lst.getTasks(), Integer.parseInt(command[1]));
-                    } else if (command[0].toLowerCase().equals("unmark")) {
-                        Ui.unmark(lst.getTasks(), Integer.parseInt(command[1]));
-                    } else if (command[0].toLowerCase().equals("todo")) {
-                        ToDos currentTask = new ToDos(command[1]);
-                        lst.add(currentTask);
-                        ui.addTaskMessage(lst.getTasks(), currentTask);
-                    } else if (command[0].toLowerCase().equals("deadline")) {
-                        String[] segment = command[1].split("/");
-                        if (segment.length < 2) throw new HolidayException("Improper Command format");
-                        String[] dueBy = segment[1].split(" ", 2);
-                        Deadlines currentTask = new Deadlines(segment[0], dueBy[1]);
-                        lst.add(currentTask);
-                        ui.addTaskMessage(lst.getTasks(),currentTask);
+                }
+                if (command[0].toLowerCase().equals("bye")) {
+                    break;
+                } else if (command[0].toLowerCase().equals("list")) {
+                    Ui.listOut(lst.getTasks());
+                } else if (command[0].toLowerCase().equals("mark")) {
+                    Ui.mark(lst.getTasks(), Integer.parseInt(command[1]));
+                } else if (command[0].toLowerCase().equals("unmark")) {
+                    Ui.unmark(lst.getTasks(), Integer.parseInt(command[1]));
+                } else if (command[0].toLowerCase().equals("todo")) {
+                    ToDos currentTask = new ToDos(command[1]);
+                    lst.add(currentTask);
+                    ui.addTaskMessage(lst.getTasks(), currentTask);
+                } else if (command[0].toLowerCase().equals("deadline")) {
+                    String[] segment = command[1].split("/");
+                    if (segment.length < 2) throw new HolidayException("Improper Command format");
+                    String[] dueBy = segment[1].split(" ", 2);
+                    Deadlines currentTask = new Deadlines(segment[0], dueBy[1]);
+                    lst.add(currentTask);
+                    ui.addTaskMessage(lst.getTasks(),currentTask);
 
-                    } else if (command[0].toLowerCase().equals("event")) {
-                        String[] segment = command[1].split("/");
-                        if (segment.length < 2) throw new HolidayException("Improper Command format");
-                        String[] start = segment[1].split(" ", 2);
-                        String[] end = segment[2].split(" ", 2);
+                } else if (command[0].toLowerCase().equals("event")) {
+                    String[] segment = command[1].split("/");
+                    if (segment.length < 2) throw new HolidayException("Improper Command format");
+                    String[] start = segment[1].split(" ", 2);
+                    String[] end = segment[2].split(" ", 2);
 
-                        Events currentTask = new Events(segment[0], start[1], end[1]);
-                        lst.add(currentTask);
-                        ui.addTaskMessage(lst.getTasks(), currentTask);
+                    Events currentTask = new Events(segment[0], start[1], end[1]);
+                    lst.add(currentTask);
+                    ui.addTaskMessage(lst.getTasks(), currentTask);
 
-                    } else if (command[0].toLowerCase().equals("delete")) {
-                        if (lst.size() == 0) { throw new HolidayException("List is empty!!"); }
-                        if (command.length < 2) { throw new HolidayException("Improper Command format"); }
-                        if (Integer.parseInt(command[1]) > lst.size() || Integer.parseInt(command[1]) < 0) {
-                            throw new HolidayException("Index doesn't exist, try again");
-                        }
-                        Ui.deleteTaskMessage(lst.getTasks(), lst.remove(Integer.parseInt(command[1])));
-
-                    } else {
-                        lst.add(new Task(message));
-                        ui.showMessage(message);
+                } else if (command[0].toLowerCase().equals("delete")) {
+                    if (lst.size() == 0) { throw new HolidayException("List is empty!!"); }
+                    if (command.length < 2) { throw new HolidayException("Improper Command format"); }
+                    if (Integer.parseInt(command[1]) > lst.size() || Integer.parseInt(command[1]) < 0) {
+                        throw new HolidayException("Index doesn't exist, try again");
                     }
+                    Ui.deleteTaskMessage(lst.getTasks(), lst.remove(Integer.parseInt(command[1])));
+
+                } else {
+                    lst.add(new Task(message));
+                    ui.showMessage(message);
+                }
 
 
             } catch (HolidayException e) {
