@@ -224,6 +224,9 @@ public class Holiday {
         Files.write(DATA_FILE, lines, StandardCharsets.UTF_8,
                 StandardOpenOption.TRUNCATE_EXISTING);
     }
+    /*
+    This function the saved .txt file and reinitializes any saved Tasks into Java objects
+     */
     private static List<Task> loadTasksFromFile() throws IOException {
         ensureDataFileExists();
         List<String> lines = Files.readAllLines(DATA_FILE, StandardCharsets.UTF_8);
@@ -241,7 +244,6 @@ public class Holiday {
                     tasks.add(new Events(parts[1], parts[2], parts[3]));
                 }
             } catch (Exception e) {
-                // corrupted line: skip (stretch goal handled)
                 System.out.println("Skipping corrupted line: " + line);
             }
         }
