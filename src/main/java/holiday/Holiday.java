@@ -39,20 +39,14 @@ public class Holiday {
                     lst.add(currentTask);
                     ui.addTaskMessage(lst.getTasks(), currentTask);
                 } else if (command[0].toLowerCase().equals("deadline")) {
-                    String[] segment = command[1].split("/");
-                    if (segment.length < 2) throw new HolidayException("Improper Command format");
-                    String[] dueBy = segment[1].split(" ", 2);
-                    Deadlines currentTask = new Deadlines(segment[0], dueBy[1]);
+                    String[] deadlineDetails = Parser.parseTimedEvent(command);
+                    Deadlines currentTask = new Deadlines(deadlineDetails[0], deadlineDetails[1]);
                     lst.add(currentTask);
                     ui.addTaskMessage(lst.getTasks(),currentTask);
 
                 } else if (command[0].toLowerCase().equals("event")) {
-                    String[] segment = command[1].split("/");
-                    if (segment.length < 2) throw new HolidayException("Improper Command format");
-                    String[] start = segment[1].split(" ", 2);
-                    String[] end = segment[2].split(" ", 2);
-
-                    Events currentTask = new Events(segment[0], start[1], end[1]);
+                    String[] eventDetails = Parser.parseTimedEvent(command);
+                    Events currentTask = new Events(eventDetails[0], eventDetails[1], eventDetails[2]);
                     lst.add(currentTask);
                     ui.addTaskMessage(lst.getTasks(), currentTask);
 

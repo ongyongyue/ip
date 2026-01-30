@@ -27,6 +27,19 @@ public class Parser {
         return parts;
     }
 
+    public static String[] parseTimedEvent(String[] command) throws HolidayException {
+        String[] segment = command[1].split("/");
+        if (segment.length < 2) throw new HolidayException("Improper Command format");
+            if (command[0].equalsIgnoreCase("deadline")) {
+                String[] dueBy = segment[1].split(" ", 2);
+                return new String[]{segment[0], dueBy[1]};
+            } else if (command[0].equalsIgnoreCase("event")) {
+                String[] start = segment[1].split(" ", 2);
+                String[] end = segment[2].split(" ", 2);
+                return new String[] {segment[0], start[1], end[1]};
+            }
+        return new String[] {null};
+    }
     public static boolean isValidCommand(String input) {
         for (CommandType type : CommandType.values()) {
             if (type.name().equalsIgnoreCase(input)) {
@@ -35,4 +48,5 @@ public class Parser {
         }
         return false;
     }
+
 }
