@@ -13,16 +13,7 @@ import java.io.IOException;
 public class Holiday {
     private static final Path DATA_FILE = Paths.get("data", "holiday.txt");
     private static Storage savedTasks = new Storage(DATA_FILE);
-    public enum CommandType {
-        LIST,
-        MARK,
-        UNMARK,
-        TODO,
-        DEADLINE,
-        EVENT,
-        DELETE,
-        BYE;
-    }
+
     public static void main(String[] args) throws HolidayException, IOException, DateTimeParseException {
         Ui ui = new Ui();
         ui.showWelcome();
@@ -35,7 +26,7 @@ public class Holiday {
             try {
                 if (args == null) {
                     throw new HolidayException("No blank entries");
-                } else if (!isValidCommand(command[0])) {
+                } else if (!Parser.isValidCommand(command[0])) {
                     throw new HolidayException("Sorry, I don't recognise this command");
                 } else if (!command[0].toLowerCase().equals("bye")
                         && !command[0].toLowerCase().equals("list")
@@ -102,15 +93,6 @@ public class Holiday {
             ui.showGoodbye();
         }
 
-    }
-
-    public static boolean isValidCommand(String input) {
-        for (CommandType type : CommandType.values()) {
-            if (type.name().equalsIgnoreCase(input)) {
-            return true;
-            }
-        }
-        return false;
     }
 
 
