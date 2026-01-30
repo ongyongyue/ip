@@ -3,7 +3,6 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
@@ -13,6 +12,7 @@ import java.io.IOException;
 
 public class Holiday {
     private static final Path DATA_FILE = Paths.get("data", "holiday.txt");
+    private static Storage savedTasks = new Storage(DATA_FILE);
     public enum CommandType {
         LIST,
         MARK,
@@ -28,7 +28,7 @@ public class Holiday {
         ui.showWelcome();
         Scanner scanner  = new Scanner(System.in);
         String message = " ";
-        TaskList lst = new TaskList(loadTasksFromFile());
+        TaskList lst = new TaskList(savedTasks.loadTasksFromFile());
         while(true) {
             message = ui.readCommand();
             String[] command = message.split(" ", 2);
@@ -89,7 +89,7 @@ public class Holiday {
             }
         }
         try {
-            saveTasksToFile(lst.getTasks());
+            savedTasks.saveTasksToFile(lst.getTasks());
         } catch (IOException e) {
             System.out.print(e.getMessage());
         } finally {
@@ -107,56 +107,10 @@ public class Holiday {
         return false;
     }
 
-    /*
-    Check if the data file exits, if it doesn't create the file and data directory
-     */
-    private static void ensureDataFileExists() throws IOException {
-        Path dir = DATA_FILE.getParent();
-        if (dir != null && Files.notExists(dir)) {
-            Files.createDirectories(dir);
-        }
-        if (Files.notExists(DATA_FILE)) {
-            Files.createFile(DATA_FILE);
-        }
-    }
 
-    /*
-    Turn Tasks into txt form and save it into a txt file
-     */
-    private static void saveTasksToFile(List<Task> tasks) throws IOException {
-        ensureDataFileExists();
-        List<String> lines = new ArrayList<>();
-        for (Task t : tasks) {
-            lines.add(t.toFileString()); // you will add this method in Task
-        }
-        Files.write(DATA_FILE, lines, StandardCharsets.UTF_8,
-                StandardOpenOption.TRUNCATE_EXISTING);
-    }
-    /*
-    This function the saved .txt file and reinitializes any saved Tasks into Java objects
-     */
-    private static List<Task> loadTasksFromFile() throws IOException {
-        ensureDataFileExists();
-        List<String> lines = Files.readAllLines(DATA_FILE, StandardCharsets.UTF_8);
 
-        List<Task> tasks = new ArrayList<>();
-        for (String line : lines) {
-            if (line.isBlank()) continue;
-            try {
-                String[] parts = line.split(",");
-                if (parts[0].equals("T")) {
-                    tasks.add(new ToDos(parts[1]));
-                } else if (parts[0].equals("D")) {
-                    tasks.add(new Deadlines(parts[1], parts[2]));
-                } else if (parts[0].equals("E")) {
-                    tasks.add(new Events(parts[1], parts[2], parts[3]));
-                }
-            } catch (Exception e) {
-                System.out.println("Skipping corrupted line: " + line);
-            }
-        }
-        return tasks;
-    }
+
+
 
 
 
