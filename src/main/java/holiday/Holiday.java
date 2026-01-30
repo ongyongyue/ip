@@ -26,37 +26,40 @@ public class Holiday {
                 } else if (!Parser.isValidCommand(command[0])) {
                     throw new HolidayException("Sorry, I don't recognise this command");
                 }
-                if (command[0].toLowerCase().equals("bye")) {
+                if (command[0].equalsIgnoreCase("bye")) {
                     break;
-                } else if (command[0].toLowerCase().equals("list")) {
+                } else if (command[0].equalsIgnoreCase("list")) {
                     Ui.listOut(lst.getTasks());
-                } else if (command[0].toLowerCase().equals("mark")) {
+                } else if (command[0].equalsIgnoreCase("mark")) {
                     Ui.mark(lst.getTasks(), Integer.parseInt(command[1]));
-                } else if (command[0].toLowerCase().equals("unmark")) {
+                } else if (command[0].equalsIgnoreCase("unmark")) {
                     Ui.unmark(lst.getTasks(), Integer.parseInt(command[1]));
-                } else if (command[0].toLowerCase().equals("todo")) {
+                } else if (command[0].equalsIgnoreCase("todo")) {
                     ToDos currentTask = new ToDos(command[1]);
                     lst.add(currentTask);
                     ui.addTaskMessage(lst.getTasks(), currentTask);
-                } else if (command[0].toLowerCase().equals("deadline")) {
+                } else if (command[0].equalsIgnoreCase("deadline")) {
                     String[] deadlineDetails = Parser.parseTimedEvent(command);
                     Deadlines currentTask = new Deadlines(deadlineDetails[0], deadlineDetails[1]);
                     lst.add(currentTask);
                     ui.addTaskMessage(lst.getTasks(),currentTask);
 
-                } else if (command[0].toLowerCase().equals("event")) {
+                } else if (command[0].equalsIgnoreCase("event")) {
                     String[] eventDetails = Parser.parseTimedEvent(command);
                     Events currentTask = new Events(eventDetails[0], eventDetails[1], eventDetails[2]);
                     lst.add(currentTask);
                     ui.addTaskMessage(lst.getTasks(), currentTask);
 
-                } else if (command[0].toLowerCase().equals("delete")) {
+                } else if (command[0].equalsIgnoreCase("Delete")) {
                     if (lst.size() == 0) { throw new HolidayException("List is empty!!"); }
                     if (command.length < 2) { throw new HolidayException("Improper Command format"); }
                     if (Integer.parseInt(command[1]) > lst.size() || Integer.parseInt(command[1]) < 0) {
                         throw new HolidayException("Index doesn't exist, try again");
                     }
                     Ui.deleteTaskMessage(lst.getTasks(), lst.remove(Integer.parseInt(command[1])));
+
+                } else if (command[0].equalsIgnoreCase("Find")){
+                    String keyword = Parser.parseFindKeyword(message);
 
                 } else {
                     lst.add(new Task(message));

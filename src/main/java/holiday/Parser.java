@@ -49,4 +49,12 @@ public class Parser {
         return false;
     }
 
+    public static String parseFindKeyword(String input) throws HolidayException {
+        String[] parts = input.split(" ", 2);
+        if (parts.length < 2 || parts[1].isBlank()) {
+            throw new HolidayException("Please provide a keyword to search for.");
+        }
+        return parts[1].trim();
+    }
+
 }
