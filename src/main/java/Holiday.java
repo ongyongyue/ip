@@ -24,16 +24,13 @@ public class Holiday {
         BYE;
     }
     public static void main(String[] args) throws HolidayException, IOException, DateTimeParseException {
-        String greeting = "\t--------------------------------------------\n"
-                + "\tHello! I'm Holiday\n"
-                + "\tHow can I help you?\n"
-                + "\t--------------------------------------------\n";
-        System.out.println(greeting);
+        Ui ui = new Ui();
+        ui.showWelcome();
         Scanner scanner  = new Scanner(System.in);
         String message = " ";
         List<Task> lst = loadTasksFromFile();
         while(true) {
-            message = scanner.nextLine();
+            message = ui.readCommand();
             String[] command = message.split(" ", 2);
             try {
                 if (args == null) {
@@ -47,40 +44,22 @@ public class Holiday {
                     if (command[0].toLowerCase().equals("bye")) {
                         break;
                     } else if (command[0].toLowerCase().equals("list")) {
-                        listOut(lst);
+                        Ui.listOut(lst);
                     } else if (command[0].toLowerCase().equals("mark")) {
-                        mark(lst, Integer.parseInt(command[1]));
+                        Ui.mark(lst, Integer.parseInt(command[1]));
                     } else if (command[0].toLowerCase().equals("unmark")) {
-                        unmark(lst, Integer.parseInt(command[1]));
+                        Ui.unmark(lst, Integer.parseInt(command[1]));
                     } else if (command[0].toLowerCase().equals("todo")) {
                         ToDos currentTask = new ToDos(command[1]);
                         lst.add(currentTask);
-                        System.out.println(
-                                "\t--------------------------------------------\n"
-                                        + "\tGot it. I've added this task:\n"
-                                        + "\t"
-                                        + String.format(
-                                        "  %s\n\tNow you have %d Tasks in the list\n",
-                                        currentTask.toString(),
-                                        lst.size())
-                                        + "\t--------------------------------------------"
-                        );
+                        ui.addTaskMessage(lst, currentTask);
                     } else if (command[0].toLowerCase().equals("deadline")) {
                         String[] segment = command[1].split("/");
                         if (segment.length < 2) throw new HolidayException("Improper Command format");
                         String[] dueBy = segment[1].split(" ", 2);
                         Deadlines currentTask = new Deadlines(segment[0], dueBy[1]);
                         lst.add(currentTask);
-                        System.out.println(
-                                "\t--------------------------------------------\n"
-                                        + "\tGot it. I've added this task:\n"
-                                        + "\t"
-                                        + String.format(
-                                        "  %s\n\tNow you have %d Tasks in the list\n",
-                                        currentTask.toString(),
-                                        lst.size())
-                                        + "\t--------------------------------------------"
-                        );
+                        ui.addTaskMessage(lst,currentTask);
 
                     } else if (command[0].toLowerCase().equals("event")) {
                         String[] segment = command[1].split("/");
@@ -90,46 +69,23 @@ public class Holiday {
 
                         Events currentTask = new Events(segment[0], start[1], end[1]);
                         lst.add(currentTask);
-                        System.out.println(
-                                "\t--------------------------------------------\n"
-                                        + "\tGot it. I've added this task:\n"
-                                        + "\t"
-                                        + String.format(
-                                        "  %s\n\tNow you have %d Tasks in the list\n",
-                                        currentTask.toString(),
-                                        lst.size())
-                                        + "\t--------------------------------------------"
-                        );
+                        ui.addTaskMessage(lst, currentTask);
 
                     } else if (command[0].toLowerCase().equals("delete")) {
                         if (lst.size() == 0) throw new HolidayException("List is empty!!");
                         if (command.length < 2) throw new HolidayException("Improper Command format");
-                        delete(lst, Integer.parseInt(command[1]));
+                        Ui.delete(lst, Integer.parseInt(command[1]));
 
                     } else {
                         lst.add(new Task(message));
-                        System.out.println(
-                                "\t--------------------------------------------\n"
-                                        + "\t"
-                                        + "added: "
-                                        + message
-                                        + "\n"
-                                        + "\t--------------------------------------------\n"
-                        );
+                        ui.showMessage(message);
                     }
 
 
             } catch (HolidayException e) {
-            System.out.println(
-                    "\t--------------------------------------------\n"
-                            + "\t"
-                            + e.getMessage()
-                            + "\n"
-                            + "\t--------------------------------------------"
-            );
+            ui.showError(e.getMessage());
             } catch (DateTimeParseException e) {
-                System.out.println("\tWrong Date time format, it should be yyyy-mm-dd HHmm" +
-                        "\n For example : 2019-08-29 1800");
+                ui.showFormatErrorMessage();
             }
         }
         try {
@@ -137,61 +93,9 @@ public class Holiday {
         } catch (IOException e) {
             System.out.print(e.getMessage());
         } finally {
-            System.out.println(
-                    "\t--------------------------------------------\n"
-                            + "\tBye! See you again!\n"
-                            + "\t--------------------------------------------"
-            );
+            ui.showGoodbye();
         }
 
-    }
-
-    public static void listOut(List<Task> lst) {
-        Iterator<Task> iList = lst.iterator();
-        int n = 1;
-        if (lst.size() > 0) {
-            System.out.println("\t--------------------------------------------\n"
-                    + "\tHere are the tasks in your list:");
-            while(iList.hasNext()) {
-                Task currentTask = iList.next();
-                System.out.printf("\t%d.%s\n",n, currentTask.toString());
-                n++;
-            }
-            System.out.println("\t--------------------------------------------");
-        } else {
-            System.out.println("\t--------------------------------------------\n"
-                    + "\tThere are no Tasks in the list");
-            System.out.println("\t--------------------------------------------");
-        }
-    }
-
-    public static void mark(List<Task> iList, int index) {
-        Task currentTask = iList.get(index - 1);
-        currentTask.setDone();
-        System.out.println("\t--------------------------------------------\n"
-                + "\tNice! I've marked this task as done:");
-        System.out.printf("\t %s\n", currentTask.toString());
-        System.out.println("\t--------------------------------------------");
-    }
-
-    public static void unmark(List<Task> iList, int index) {
-        Task currentTask = iList.get(index - 1);
-        currentTask.setUndone();
-        System.out.println("\t--------------------------------------------\n"
-                + "\t OK, I've marked this task as not done yet:");
-        System.out.printf("\t %s\n", currentTask.toString());
-        System.out.println("\t--------------------------------------------");
-    }
-
-    public static void delete(List<Task> iList, int index) {
-        Task removedTask = iList.remove(index - 1);
-        System.out.println("\t--------------------------------------------\n"
-                + "\t Noted. I've removed this task:");
-        System.out.printf("\t %s\n\tNow you have %d Tasks Remaining",
-                removedTask.toString(),
-                iList.size()
-                );
-        System.out.println("\t--------------------------------------------");
     }
 
     public static boolean isValidCommand(String input) {
