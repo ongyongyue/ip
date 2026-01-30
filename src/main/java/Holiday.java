@@ -28,7 +28,7 @@ public class Holiday {
         ui.showWelcome();
         Scanner scanner  = new Scanner(System.in);
         String message = " ";
-        List<Task> lst = loadTasksFromFile();
+        TaskList lst = new TaskList(loadTasksFromFile());
         while(true) {
             message = ui.readCommand();
             String[] command = message.split(" ", 2);
@@ -44,22 +44,22 @@ public class Holiday {
                     if (command[0].toLowerCase().equals("bye")) {
                         break;
                     } else if (command[0].toLowerCase().equals("list")) {
-                        Ui.listOut(lst);
+                        Ui.listOut(lst.getTasks());
                     } else if (command[0].toLowerCase().equals("mark")) {
-                        Ui.mark(lst, Integer.parseInt(command[1]));
+                        Ui.mark(lst.getTasks(), Integer.parseInt(command[1]));
                     } else if (command[0].toLowerCase().equals("unmark")) {
-                        Ui.unmark(lst, Integer.parseInt(command[1]));
+                        Ui.unmark(lst.getTasks(), Integer.parseInt(command[1]));
                     } else if (command[0].toLowerCase().equals("todo")) {
                         ToDos currentTask = new ToDos(command[1]);
                         lst.add(currentTask);
-                        ui.addTaskMessage(lst, currentTask);
+                        ui.addTaskMessage(lst.getTasks(), currentTask);
                     } else if (command[0].toLowerCase().equals("deadline")) {
                         String[] segment = command[1].split("/");
                         if (segment.length < 2) throw new HolidayException("Improper Command format");
                         String[] dueBy = segment[1].split(" ", 2);
                         Deadlines currentTask = new Deadlines(segment[0], dueBy[1]);
                         lst.add(currentTask);
-                        ui.addTaskMessage(lst,currentTask);
+                        ui.addTaskMessage(lst.getTasks(),currentTask);
 
                     } else if (command[0].toLowerCase().equals("event")) {
                         String[] segment = command[1].split("/");
@@ -69,12 +69,12 @@ public class Holiday {
 
                         Events currentTask = new Events(segment[0], start[1], end[1]);
                         lst.add(currentTask);
-                        ui.addTaskMessage(lst, currentTask);
+                        ui.addTaskMessage(lst.getTasks(), currentTask);
 
                     } else if (command[0].toLowerCase().equals("delete")) {
-                        if (lst.size() == 0) throw new HolidayException("List is empty!!");
-                        if (command.length < 2) throw new HolidayException("Improper Command format");
-                        Ui.delete(lst, Integer.parseInt(command[1]));
+                        if (lst.size() == 0) { throw new HolidayException("List is empty!!"); }
+                        if (command.length < 2) { throw new HolidayException("Improper Command format"); }
+                        Ui.deleteTaskMessage(lst.getTasks(), lst.remove(Integer.parseInt(command[1])));
 
                     } else {
                         lst.add(new Task(message));
@@ -89,7 +89,7 @@ public class Holiday {
             }
         }
         try {
-            saveTasksToFile(lst);
+            saveTasksToFile(lst.getTasks());
         } catch (IOException e) {
             System.out.print(e.getMessage());
         } finally {

@@ -117,10 +117,9 @@ public class Ui {
     }
 
     /*
-    function to delete messages
+    display delete message
      */
-    public static void delete(List<Task> iList, int index) {
-        Task removedTask = iList.remove(index - 1);
+    public static void deleteTaskMessage(List<Task> iList, Task removedTask) {
         System.out.println("\t--------------------------------------------\n"
                 + "\t Noted. I've removed this task:");
         System.out.printf("\t %s\n\tNow you have %d Tasks Remaining",
