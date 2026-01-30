@@ -11,6 +11,9 @@ public class Parser {
         DELETE,
         BYE;
     }
+    /*
+    Parses the input command throws HolidayException if command is invalid
+     */
     public static String[] parseCommand(String fullCommand) throws HolidayException {
         String[] command = fullCommand.trim().split(" ", 2);
         if (command.length == 0 || command[0].isBlank()) {
@@ -21,12 +24,16 @@ public class Parser {
                 && command.length < 2) throw new HolidayException("Description can't be blank");
         return command;
     }
-
+    /*
+    Parses Tasks that are saved in file text form (ie: T,Help Mom)
+     */
     public static String[] parseSavedTasks (String savedTasks) {
         String[] parts = savedTasks.split(",");
         return parts;
     }
-
+    /*
+    Parses commands for Deadline and Event Tasks
+     */
     public static String[] parseTimedEvent(String[] command) throws HolidayException {
         String[] segment = command[1].split("/");
         if (segment.length < 2) throw new HolidayException("Improper Command format");
@@ -40,6 +47,9 @@ public class Parser {
             }
         return new String[] {null};
     }
+    /*
+    Check if an input is a valid command
+     */
     public static boolean isValidCommand(String input) {
         for (CommandType type : CommandType.values()) {
             if (type.name().equalsIgnoreCase(input)) {
