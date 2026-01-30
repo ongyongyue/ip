@@ -16,7 +16,7 @@ public class Ui {
                 + "\t--------------------------------------------");
     }
     /*
-    display goodbye message
+    Display goodbye message
      */
     public void showGoodbye() {
         System.out.println("\t--------------------------------------------\n"
@@ -24,19 +24,19 @@ public class Ui {
                 + "\t--------------------------------------------");
     }
     /*
-    displays a line
+    Displays a line
      */
     public void showLine() {
         System.out.println("\t--------------------------------------------");
     }
     /*
-    read commands
+    Read commands
      */
     public String readCommand() {
         return scanner.nextLine();
     }
     /*
-    show error message
+    Show error message
      */
     public void showError(String msg) {
         System.out.println("\t--------------------------------------------\n"
@@ -44,13 +44,13 @@ public class Ui {
                 + "\t--------------------------------------------");
     }
     /*
-    print any message
+    Print any message
      */
     public void showMessage(String msg) {
         System.out.println(msg);
     }
     /*
-    print message when task is added
+    Print message when task is added
      */
     public void addTaskMessage(List<Task> lst, Task currentTask) {
         System.out.println(
@@ -73,7 +73,7 @@ public class Ui {
     }
 
     /*
-    function to list out items in the list
+    Lists out tasks in the list
      */
     public static void listOut(List<Task> lst) throws HolidayException {
         Iterator<Task> iList = lst.iterator();
@@ -94,7 +94,7 @@ public class Ui {
     }
 
     /*
-    function to mark items as done
+    Mark the indexed task in the TaskList iList as done
      */
     public static void mark(List<Task> iList, int index) {
         Task currentTask = iList.get(index - 1);
@@ -106,7 +106,7 @@ public class Ui {
     }
 
     /*
-    function to unmark done items
+    Mark the indexed task in the TaskList iList as not done
      */
     public static void unmark(List<Task> iList, int index) {
         Task currentTask = iList.get(index - 1);
@@ -118,7 +118,7 @@ public class Ui {
     }
 
     /*
-    display delete message
+    Display delete message when deleted specified Task
      */
     public static void deleteTaskMessage(List<Task> iList, Task removedTask) {
         System.out.println("\t--------------------------------------------\n"
