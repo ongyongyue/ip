@@ -139,8 +139,8 @@ public class Ui {
             System.out.println("\t--------------------------------------------");
             System.out.println("\tHere are the matching tasks in your list:");
 
-            for (int i = 0; i < matches.size(); i++) {
-                System.out.println(" " + (i + 1) + "." + matches.get(i));
+            for (int i = 1; i < matches.size() + 1; i++) {
+                System.out.printf("\t%d.%s\n",i, matches.get(i));
             }
 
             System.out.println("\t--------------------------------------------");

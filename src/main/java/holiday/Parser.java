@@ -9,6 +9,7 @@ public class Parser {
         DEADLINE,
         EVENT,
         DELETE,
+        FIND,
         BYE;
     }
     public static String[] parseCommand(String fullCommand) throws HolidayException {
@@ -17,7 +18,6 @@ public class Parser {
             throw new HolidayException("Command cannot be blank");
         } else if (!command[0].toLowerCase().equals("bye")
                 && !command[0].toLowerCase().equals("list")
-                && !command[0].toLowerCase().equals("delete")
                 && command.length < 2) throw new HolidayException("Description can't be blank");
         return command;
     }
