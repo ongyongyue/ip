@@ -1,4 +1,5 @@
 import java.nio.file.StandardOpenOption;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class Holiday {
         DELETE,
         BYE;
     }
-    public static void main(String[] args) throws HolidayException, IOException {
+    public static void main(String[] args) throws HolidayException, IOException, DateTimeParseException {
         String greeting = "\t--------------------------------------------\n"
                 + "\tHello! I'm Holiday\n"
                 + "\tHow can I help you?\n"
@@ -126,6 +127,9 @@ public class Holiday {
                             + "\n"
                             + "\t--------------------------------------------"
             );
+            } catch (DateTimeParseException e) {
+                System.out.println("\tWrong Date time format, it should be yyyy-mm-dd HHmm" +
+                        "\n For example : 2019-08-29 1800");
             }
         }
         try {
