@@ -31,7 +31,7 @@ public class Holiday {
         TaskList lst = new TaskList(savedTasks.loadTasksFromFile());
         while(true) {
             message = ui.readCommand();
-            String[] command = message.split(" ", 2);
+            String[] command = Parser.parseCommand(message);
             try {
                 if (args == null) {
                     throw new HolidayException("No blank entries");
@@ -45,6 +45,9 @@ public class Holiday {
                         break;
                     } else if (command[0].toLowerCase().equals("list")) {
                         Ui.listOut(lst.getTasks());
+                        if (lst.size() == 0) {
+                            throw new HolidayException("List is empty!!");
+                        }
                     } else if (command[0].toLowerCase().equals("mark")) {
                         Ui.mark(lst.getTasks(), Integer.parseInt(command[1]));
                     } else if (command[0].toLowerCase().equals("unmark")) {
@@ -74,6 +77,9 @@ public class Holiday {
                     } else if (command[0].toLowerCase().equals("delete")) {
                         if (lst.size() == 0) { throw new HolidayException("List is empty!!"); }
                         if (command.length < 2) { throw new HolidayException("Improper Command format"); }
+                        if (Integer.parseInt(command[1]) > lst.size() || Integer.parseInt(command[1]) < 0) {
+                            throw new HolidayException("Index doesn't exist, try again");
+                        }
                         Ui.deleteTaskMessage(lst.getTasks(), lst.remove(Integer.parseInt(command[1])));
 
                     } else {

@@ -15,16 +15,6 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    private void ensureExists() throws IOException {
-        Path dir = filePath.getParent();
-        if (dir != null && Files.notExists(dir)) {
-            Files.createDirectories(dir);
-        }
-        if (Files.notExists(filePath)) {
-            Files.createFile(filePath);
-        }
-    }
-
     /*
     This function reads the saved .txt file and reinitializes any saved Tasks into Task instances
      */
@@ -36,7 +26,7 @@ public class Storage {
         for (String line : lines) {
             if (line.isBlank()) continue;
             try {
-                String[] parts = line.split(",");
+                String[] parts = Parser.parseSavedTasks(line);
                 if (parts[0].equals("T")) {
                     tasks.add(new ToDos(parts[1]));
                 } else if (parts[0].equals("D")) {
