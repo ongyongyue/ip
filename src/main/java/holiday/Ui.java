@@ -124,7 +124,7 @@ public class Ui {
     public static void deleteTaskMessage(List<Task> iList, Task removedTask) {
         System.out.println("\t--------------------------------------------\n"
                 + "\t Noted. I've removed this task:");
-        System.out.printf("\t %s\n\tNow you have %d Tasks Remaining",
+        System.out.printf("\t %s\n\tNow you have %d Tasks Remaining\n",
                 removedTask.toString(),
                 iList.size()
         );
