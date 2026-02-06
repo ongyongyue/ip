@@ -9,8 +9,8 @@ public class Ui {
     /*
     Display welcome message
      */
-    public void  showWelcome() {
-        System.out.println("\t--------------------------------------------\n"
+    public String getWelcomeMessage() {
+        return("\t--------------------------------------------\n"
                 + "\tHello! I'm Holiday\n"
                 + "\tHow can I help you?\n"
                 + "\t--------------------------------------------");
@@ -18,10 +18,13 @@ public class Ui {
     /*
     Display goodbye message
      */
-    public void showGoodbye() {
-        System.out.println("\t--------------------------------------------\n"
+    public String getGoodbyeMessage() {
+        return("\t--------------------------------------------\n"
                 + "\tBye! See you again!\n"
                 + "\t--------------------------------------------");
+    }
+    public String getEchoMessage(String input) {
+        return input;
     }
     /*
     Displays a line
@@ -149,6 +152,87 @@ public class Ui {
             System.out.println("\t There are no Tasks Matching this keyword");
             System.out.println("\t--------------------------------------------");
         }
+    }
+    private String line() {
+        return "\t--------------------------------------------\n";
+    }
+
+    public String getErrorMessage(String msg) {
+        return line()
+                + "\t" + msg + "\n"
+                + line();
+    }
+
+    public String getFormatErrorMessage() {
+        return "\tWrong Date time format, it should be yyyy-mm-dd HHmm\n"
+                + "\tFor example : 2019-08-29 1800";
+    }
+
+    public String getAddTaskMessage(List<Task> lst, Task currentTask) {
+        return line()
+                + "\tGot it. I've added this task:\n"
+                + "\t  " + currentTask + "\n"
+                + "\tNow you have " + lst.size() + " Tasks in the list\n"
+                + line();
+    }
+
+    public String getListMessage(List<Task> lst) throws HolidayException {
+        if (lst.isEmpty()) {
+            throw new HolidayException("List is empty!!");
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(line())
+                .append("\tHere are the tasks in your list:\n");
+
+        int i = 1;
+        for (Task task : lst) {
+            sb.append("\t").append(i++).append(".").append(task).append("\n");
+        }
+
+        sb.append(line());
+        return sb.toString();
+    }
+
+    public String getMarkMessage(List<Task> lst, int index) {
+        Task task = lst.get(index - 1);
+        return line()
+                + "\tNice! I've marked this task as done:\n"
+                + "\t " + task + "\n"
+                + line();
+    }
+
+    public String getUnmarkMessage(List<Task> lst, int index) {
+        Task task = lst.get(index - 1);
+        return line()
+                + "\tOK, I've marked this task as not done yet:\n"
+                + "\t " + task + "\n"
+                + line();
+    }
+
+    public String getDeleteTaskMessage(List<Task> lst, Task removedTask) {
+        return line()
+                + "\tNoted. I've removed this task:\n"
+                + "\t " + removedTask + "\n"
+                + "\tNow you have " + lst.size() + " Tasks Remaining\n"
+                + line();
+    }
+
+    public String getMatchingTasksMessage(TaskList matches) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(line());
+
+        if (matches.size() == 0) {
+            sb.append("\tThere are no Tasks Matching this keyword\n");
+        } else {
+            sb.append("\tHere are the matching tasks in your list:\n");
+            for (int i = 1; i <= matches.size(); i++) {
+                sb.append("\t").append(i).append(".").append(matches.get(i)).append("\n");
+            }
+        }
+
+        sb.append(line());
+        return sb.toString();
     }
 
 
