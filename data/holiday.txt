@@ -1,4 +1,4 @@
 D,stuff ,2019-08-29 1909
 D,hello ,2019-09-18 1200
 T,eat
-E,mahjong ,2029-08-09 1400,2029-08-10 1400
+T,kill myslef
