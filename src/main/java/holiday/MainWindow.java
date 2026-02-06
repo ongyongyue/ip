@@ -1,5 +1,9 @@
 package holiday;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.util.Duration;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -55,6 +59,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, holidayChadImage)
         );
         userInput.clear();
+
+        if (input.equalsIgnoreCase("bye")) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(0.8));
+            delay.setOnFinished(e -> Platform.exit());
+            delay.play();
+        }
     }
 }
 
