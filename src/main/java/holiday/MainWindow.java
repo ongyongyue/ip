@@ -39,7 +39,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Injects the Duke instance
+     * Injects the Holiday instance
      */
     public void setHoliday(Holiday holiday) {
         this.holiday = holiday;
