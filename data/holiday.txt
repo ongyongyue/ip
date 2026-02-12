@@ -1,4 +1,5 @@
 D,stuff ,2019-08-29 1909
 D,hello ,2019-09-18 1200
 T,eat
-T,kill myslef
+T,Homework
+T,kill myself
