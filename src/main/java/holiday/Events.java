@@ -17,6 +17,16 @@ public class Events extends Task {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) return false;
+
+        Events other = (Events) obj;
+        return this.startDateTime.equals(other.startDateTime)
+                && this.endDateTime.equals(other.endDateTime);
+    }
+
+
+    @Override
     public String toString() {
         return
             String.format(
