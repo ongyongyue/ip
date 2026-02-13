@@ -1,9 +1,4 @@
-package holiday.Command;
-
-import holiday.Storage;
-import holiday.TaskList;
-import holiday.ToDos;
-import holiday.Ui;
+package holiday;
 
 public class TodoCommand extends Command {
     private final String description;

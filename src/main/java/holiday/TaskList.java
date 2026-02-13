@@ -36,14 +36,15 @@ public class TaskList {
     /*
     Searches task list for Tasks matching the keyword, returns the matches
      */
-    public List<Task> find(String keyword) {
+    public TaskList find(String keyword) {
         List<Task> matches = new ArrayList<>();
         for (Task task : tasks) {
             if (task.toString().contains(keyword)) {
                 matches.add(task);
             }
         }
-        return matches;
+        TaskList matchedTasks = new TaskList(matches);
+        return matchedTasks;
     }
 
 }
