@@ -25,7 +25,6 @@ public class Deadlines extends Task {
         return this.doByDate.equals(other.doByDate);
     }
 
-
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), this.doByDate.format(OUTPUT));
