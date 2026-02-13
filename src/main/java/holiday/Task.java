@@ -55,6 +55,17 @@ public class Task {
         );
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Task)) return false;
+
+        Task other = (Task) obj;
+        return this.description.equalsIgnoreCase(other.description);
+    }
+
+
+
     /*
     Function that returns information about Task to be stored in a txt file
     in a nice format

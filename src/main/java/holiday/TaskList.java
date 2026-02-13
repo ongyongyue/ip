@@ -47,4 +47,9 @@ public class TaskList {
         return matchedTasks;
     }
 
+    public boolean contains(Task task) {
+        return tasks.contains(task);
+    }
+
+
 }
