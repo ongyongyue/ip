@@ -1,7 +1,7 @@
 package holiday;
 
 public class ToDos extends Task {
-    ToDos(String description) {
+    public ToDos(String description) {
         super(description);
     }
 

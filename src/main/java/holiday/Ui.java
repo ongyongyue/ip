@@ -99,26 +99,7 @@ public class Ui {
     /*
     Mark the indexed task in the TaskList iList as done
      */
-    public static void mark(List<Task> iList, int index) {
-        Task currentTask = iList.get(index - 1);
-        currentTask.setDone();
-        System.out.println("\t--------------------------------------------\n"
-                + "\tNice! I've marked this task as done:");
-        System.out.printf("\t %s\n", currentTask.toString());
-        System.out.println("\t--------------------------------------------");
-    }
 
-    /*
-    Mark the indexed task in the TaskList iList as not done
-     */
-    public static void unmark(List<Task> iList, int index) {
-        Task currentTask = iList.get(index - 1);
-        currentTask.setUndone();
-        System.out.println("\t--------------------------------------------\n"
-                + "\t OK, I've marked this task as not done yet:");
-        System.out.printf("\t %s\n", currentTask.toString());
-        System.out.println("\t--------------------------------------------");
-    }
 
     /*
     Display delete message when deleted specified Task

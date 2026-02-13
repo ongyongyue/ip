@@ -1,5 +1,7 @@
 package holiday;
 
+import java.util.List;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -20,6 +22,29 @@ public class Task {
 
     public boolean getIsDone() {
         return this.isDone;
+    }
+
+    public static Task mark(List<Task> iList, int index) {
+        Task currentTask = iList.get(index - 1);
+        currentTask.setDone();
+        System.out.println("\t--------------------------------------------\n"
+                + "\tNice! I've marked this task as done:");
+        System.out.printf("\t %s\n", currentTask.toString());
+        System.out.println("\t--------------------------------------------");
+        return currentTask;
+    }
+
+    /*
+    Mark the indexed task in the TaskList iList as not done
+     */
+    public static Task unmark(List<Task> iList, int index) {
+        Task currentTask = iList.get(index - 1);
+        currentTask.setUndone();
+        System.out.println("\t--------------------------------------------\n"
+                + "\t OK, I've marked this task as not done yet:");
+        System.out.printf("\t %s\n", currentTask.toString());
+        System.out.println("\t--------------------------------------------");
+        return currentTask;
     }
 
     public String toString() {

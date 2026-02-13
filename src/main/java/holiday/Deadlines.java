@@ -6,8 +6,10 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadlines extends Task {
     private LocalDateTime doByDate;
+
     private static final DateTimeFormatter INPUT =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
     private static final DateTimeFormatter OUTPUT =
             DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
 
