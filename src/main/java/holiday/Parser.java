@@ -18,6 +18,7 @@ public class Parser {
     public static Command parseCommand(String fullCommand) throws HolidayException {
         String[] command = fullCommand.trim().split(" ", 2);
         String commandWord = command[0];
+        assert command != null : "Parser should always return a command";
 
         switch (commandWord) {
             case "bye":
