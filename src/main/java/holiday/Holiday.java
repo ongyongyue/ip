@@ -5,6 +5,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Main application class for the Holiday chatbot.
+ * Handles initialization and command execution.
+ */
 public class Holiday {
 
     private static final Path DATA_FILE = Paths.get("data", "holiday.txt");
@@ -13,6 +17,9 @@ public class Holiday {
     private final Ui ui = new Ui();
     private TaskList lst;
 
+    /**
+     * Creates the Holiday chatbot and loads saved tasks.
+     */
     public Holiday() {
         try {
             lst = new TaskList(savedTasks.loadTasksFromFile());
@@ -21,7 +28,12 @@ public class Holiday {
         }
     }
 
-    /** Processes one user input and returns the reply string for the GUI. */
+    /**
+     * Processes one user input and returns the chatbot response.
+     *
+     * @param input user command string
+     * @return response message to display
+     */
     public String getResponse(String input) {
         try {
             Command command = Parser.parseCommand(input);
@@ -34,12 +46,14 @@ public class Holiday {
         } catch (Exception e) {
             return ui.getErrorMessage("Something went wrong: " + e.getMessage());
         }
-
     }
 
-    /** Optional: keep CLI entrypoint if you still want it. */
+    /**
+     * Optional CLI entry point.
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
-        // You can keep your CLI here if you want, but GUI will not use this.
         new Ui().getWelcomeMessage();
     }
 }

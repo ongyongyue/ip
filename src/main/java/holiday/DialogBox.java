@@ -19,8 +19,8 @@ import javafx.scene.Node;
 import javafx.scene.text.TextAlignment;
 
 /**
- * Represents a dialog box consisting of an ImageView to represent the speaker's face
- * and a label containing text from the speaker.
+ * Represents a dialog box in the GUI consisting of
+ * a speaker image and a text message.
  */
 public class DialogBox extends HBox {
     @FXML
