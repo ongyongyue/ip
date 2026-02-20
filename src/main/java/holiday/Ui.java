@@ -24,9 +24,9 @@ public class Ui {
                 + "\t--------------------------------------------");
     }
     public static String getInputFormat(String input) {
-        return ("\t--------------------------------------------\n"
-                + String.format("%s\n", input)
-                + "\t--------------------------------------------");
+        return ("--------------------------------------------\t\n"
+                + String.format("%s\t\t\n", input)
+                + "--------------------------------------------\t");
     }
     public String getEchoMessage(String input) {
         return input;
