@@ -51,5 +51,9 @@ shadowJar {
 }
 
 run{
+    jvmArgs = [
+            '--module-path', configurations.runtimeClasspath.asPath,
+            '--add-modules', 'javafx.controls,javafx.fxml,javafx.graphics'
+    ]
     standardInput = System.in
 }

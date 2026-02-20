@@ -7,6 +7,10 @@ public class TodoCommand extends Command {
         this.description = description;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws HolidayException {
         ToDos task = new ToDos(description);
