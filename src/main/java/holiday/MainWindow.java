@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(new Ui().getWelcomeMessage(), holidayChadImage)
+                DialogBox.getBotDialog(new Ui().getWelcomeMessage(), holidayChadImage)
         );
     }
 
@@ -60,7 +60,7 @@ public class MainWindow extends AnchorPane {
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(Ui.getInputFormat(input), userImage),
-                DialogBox.getDukeDialog(response, holidayChadImage)
+                DialogBox.getBotDialog(response, holidayChadImage)
         );
         userInput.clear();
 

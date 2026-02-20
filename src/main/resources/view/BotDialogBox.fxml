@@ -4,25 +4,52 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<fx:root alignment="TOP_RIGHT"
+<fx:root alignment="TOP_LEFT"
          maxHeight="1.7976931348623157E308"
          maxWidth="1.7976931348623157E308"
          prefWidth="400.0"
+         spacing="8.0"
          type="javafx.scene.layout.HBox"
          xmlns="http://javafx.com/javafx/17"
          xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <Label fx:id="dialog"
-               text="Right Aligned Text that will now wrap and align correctly."
-               wrapText="true"
-               maxWidth="Infinity"
-               minHeight="-Infinity"
-               style="-fx-alignment: CENTER_LEFT; -fx-text-alignment: LEFT;" />
 
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
-    </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets bottom="6.0" left="12.0" right="60.0" top="6.0" />
     </padding>
+
+    <children>
+
+        <!-- Avatar on the LEFT -->
+        <ImageView fx:id="displayPicture"
+                   fitHeight="40.0" fitWidth="40.0"
+                   pickOnBounds="true" preserveRatio="true"
+                   HBox.hgrow="NEVER"
+                   style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1);" />
+
+        <!-- Bubble + timestamp to the RIGHT of avatar -->
+        <VBox spacing="3.0" HBox.hgrow="ALWAYS">
+            <children>
+                <Label fx:id="dialog"
+                       wrapText="true"
+                       maxWidth="250.0"
+                       minHeight="-Infinity"
+                       style="-fx-background-color: #FFFFFF;
+                              -fx-background-radius: 0 16 16 16;
+                              -fx-padding: 10 14 10 14;
+                              -fx-font-family: 'Segoe UI';
+                              -fx-font-size: 13px;
+                              -fx-text-fill: #1A1A1A;
+                              -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 5, 0, 0, 2);" />
+                <Label fx:id="timestamp"
+                       text="Just now"
+                       style="-fx-font-family: 'Segoe UI';
+                              -fx-font-size: 10px;
+                              -fx-text-fill: #AAAAAA;
+                              -fx-padding: 0 0 0 2;" />
+            </children>
+        </VBox>
+
+    </children>
 </fx:root>

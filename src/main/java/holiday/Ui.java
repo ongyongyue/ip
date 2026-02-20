@@ -16,10 +16,8 @@ public class Ui {
      * @return formatted welcome message
      */
     public String getWelcomeMessage() {
-        return("\t--------------------------------------------\n"
-                + "\tHello! I'm Holiday\n"
-                + "\tHow can I help you?\n"
-                + "\t--------------------------------------------");
+        return( "Hello! I'm Holiday\n"
+                + "How can I help you?\n");
     }
 
     /**
@@ -28,9 +26,7 @@ public class Ui {
      * @return formatted goodbye message
      */
     public String getGoodbyeMessage() {
-        return("\t--------------------------------------------\n"
-                + "\tBye! See you again!\n"
-                + "\t--------------------------------------------");
+        return( "Bye! See you again!");
     }
 
     /**
@@ -40,9 +36,7 @@ public class Ui {
      * @return formatted string with borders
      */
     public static String getInputFormat(String input) {
-        return ("--------------------------------------------\t\n"
-                + String.format("%s\t\t\n", input)
-                + "--------------------------------------------\t");
+        return (String.format("%s\n", input));
     }
 
     /**
@@ -61,9 +55,7 @@ public class Ui {
      * @return formatted error output
      */
     public String getErrorMessage(String msg) {
-        return line()
-                + "\t" + msg + "\n"
-                + line();
+        return (msg + "\n");
     }
 
     /**
@@ -72,8 +64,8 @@ public class Ui {
      * @return date-time format error message
      */
     public String getFormatErrorMessage() {
-        return "\tWrong Date time format, it should be yyyy-mm-dd HHmm\n"
-                + "\tFor example : 2019-08-29 1800";
+        return "Wrong Date time format, it should be yyyy-mm-dd HHmm\n"
+                + "For example : 2019-08-29 1800";
     }
 
     /**
@@ -84,11 +76,9 @@ public class Ui {
      * @return formatted add task message
      */
     public String getAddTaskMessage(List<Task> lst, Task currentTask) {
-        return line()
-                + "\tGot it. I've added this task:\n"
-                + "\t  " + currentTask + "\n"
-                + "\tNow you have " + lst.size() + " Tasks in the list\n"
-                + line();
+        return "Got it. I've added this task:\n"
+                + currentTask + "\n"
+                + "Now you have " + lst.size() + " Tasks in the list\n";
     }
 
     /**
@@ -104,15 +94,13 @@ public class Ui {
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append(line())
-                .append("\tHere are the tasks in your list:\n");
+        sb.append("Here are the tasks in your list:\n");
 
         int i = 1;
         for (Task task : lst) {
-            sb.append("\t").append(i++).append(".").append(task).append("\n");
+            sb.append(i++).append(".").append(task).append("\n");
         }
 
-        sb.append(line());
         return sb.toString();
     }
 
@@ -125,10 +113,8 @@ public class Ui {
      */
     public String getMarkMessage(List<Task> lst, int index) {
         Task task = lst.get(index - 1);
-        return line()
-                + "\tNice! I've marked this task as done:\n"
-                + "\t " + task + "\n"
-                + line();
+        return  "Nice! I've marked this task as done:\n"
+                + "\t" + task + "\n";
     }
 
     /**
@@ -140,10 +126,8 @@ public class Ui {
      */
     public String getUnmarkMessage(List<Task> lst, int index) {
         Task task = lst.get(index - 1);
-        return line()
-                + "\tOK, I've marked this task as not done yet:\n"
-                + "\t " + task + "\n"
-                + line();
+        return "OK, I've marked this task as not done yet:\n"
+                + "\t " + task + "\n";
     }
 
     /**
@@ -154,11 +138,9 @@ public class Ui {
      * @return formatted delete confirmation
      */
     public String getDeleteTaskMessage(List<Task> lst, Task removedTask) {
-        return line()
-                + "\tNoted. I've removed this task:\n"
+        return  "Noted. I've removed this task:\n"
                 + "\t " + removedTask + "\n"
-                + "\tNow you have " + lst.size() + " Tasks Remaining\n"
-                + line();
+                + "Now you have " + lst.size() + " Tasks Remaining\n";
     }
 
     /**
@@ -169,18 +151,15 @@ public class Ui {
      */
     public String getMatchingTasksMessage(TaskList matches) {
         StringBuilder sb = new StringBuilder();
-        sb.append(line());
 
         if (matches.size() == 0) {
-            sb.append("\tThere are no Tasks Matching this keyword\n");
+            sb.append("There are no Tasks Matching this keyword\n");
         } else {
-            sb.append("\tHere are the matching tasks in your list:\n");
+            sb.append("Here are the matching tasks in your list:\n");
             for (int i = 1; i <= matches.size(); i++) {
                 sb.append("\t").append(i).append(".").append(matches.get(i)).append("\n");
             }
         }
-
-        sb.append(line());
         return sb.toString();
     }
 }
