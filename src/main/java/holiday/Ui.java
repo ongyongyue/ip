@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Handles all user interface text formatting and messages
- * displayed to the user.
+ * Handles formatting and generation of all user interface messages.
+ * Responsible for displaying feedback, errors, and task-related outputs.
  */
 public class Ui {
     private final Scanner scanner = new Scanner(System.in);
@@ -34,7 +34,7 @@ public class Ui {
     }
 
     /**
-     * Formats a string input inside separator lines.
+     * Formats user input inside separator lines.
      *
      * @param input text to display
      * @return formatted string with borders
