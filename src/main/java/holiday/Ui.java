@@ -23,6 +23,11 @@ public class Ui {
                 + "\tBye! See you again!\n"
                 + "\t--------------------------------------------");
     }
+    public static String getInputFormat(String input) {
+        return ("\t--------------------------------------------\n"
+                + String.format("%s\n", input)
+                + "\t--------------------------------------------");
+    }
     public String getEchoMessage(String input) {
         return input;
     }

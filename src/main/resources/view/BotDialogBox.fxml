@@ -18,7 +18,7 @@
                wrapText="true"
                maxWidth="Infinity"
                minHeight="-Infinity"
-               style="-fx-alignment: CENTER_RIGHT; -fx-text-alignment: RIGHT;" />
+               style="-fx-alignment: CENTER_LEFT; -fx-text-alignment: LEFT;" />
 
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>

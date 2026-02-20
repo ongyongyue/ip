@@ -55,7 +55,7 @@ public class MainWindow extends AnchorPane {
         String response = holiday.getResponse(input);
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getUserDialog(Ui.getInputFormat(input), userImage),
                 DialogBox.getDukeDialog(response, holidayChadImage)
         );
         userInput.clear();
