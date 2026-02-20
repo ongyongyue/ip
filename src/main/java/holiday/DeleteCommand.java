@@ -23,7 +23,12 @@ public class DeleteCommand extends Command {
      * @param storage storage handler
      * @return confirmation message
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws HolidayException {
+        if (tasks.size() == 0) {
+            throw new HolidayException("List is empty, nothing to delete!");
+        } else if (taskIdx > tasks.size()) {
+            throw new HolidayException("Index does not exist");
+        }
         Task removedTask = tasks.remove(taskIdx);
         return ui.getDeleteTaskMessage(tasks.getTasks(), removedTask);
     }
