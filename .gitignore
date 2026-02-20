@@ -4,7 +4,7 @@
 /*.iml
 
 #Saved list
-
+data/holiday.txt
 
 # Gradle build files
 /.gradle/
