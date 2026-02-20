@@ -1,13 +1,19 @@
 package holiday;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handles all user interface text formatting and messages
+ * displayed to the user.
+ */
 public class Ui {
     private final Scanner scanner = new Scanner(System.in);
-    /*
-    Display welcome message
+
+    /**
+     * Returns the welcome message shown when the program starts.
+     *
+     * @return formatted welcome message
      */
     public String getWelcomeMessage() {
         return("\t--------------------------------------------\n"
@@ -15,145 +21,68 @@ public class Ui {
                 + "\tHow can I help you?\n"
                 + "\t--------------------------------------------");
     }
-    /*
-    Display goodbye message
+
+    /**
+     * Returns the goodbye message shown when the program exits.
+     *
+     * @return formatted goodbye message
      */
     public String getGoodbyeMessage() {
         return("\t--------------------------------------------\n"
                 + "\tBye! See you again!\n"
                 + "\t--------------------------------------------");
     }
+
+    /**
+     * Formats a string input inside separator lines.
+     *
+     * @param input text to display
+     * @return formatted string with borders
+     */
     public static String getInputFormat(String input) {
         return ("--------------------------------------------\t\n"
                 + String.format("%s\t\t\n", input)
                 + "--------------------------------------------\t");
     }
-    public String getEchoMessage(String input) {
-        return input;
-    }
-    /*
-    Displays a line
-     */
-    public void showLine() {
-        System.out.println("\t--------------------------------------------");
-    }
-    /*
-    Read commands
-     */
-    public String readCommand() {
-        return scanner.nextLine();
-    }
-    /*
-    Show error message
-     */
-    public void showError(String msg) {
-        System.out.println("\t--------------------------------------------\n"
-                + "\t" + msg + "\n"
-                + "\t--------------------------------------------");
-    }
-    /*
-    Print any message
-     */
-    public void showMessage(String msg) {
-        System.out.println(msg);
-    }
-    /*
-    Print message when task is added
-     */
-    public void addTaskMessage(List<Task> lst, Task currentTask) {
-        System.out.println(
-                "\t--------------------------------------------\n"
-                        + "\tGot it. I've added this task:\n"
-                        + "\t"
-                        + String.format(
-                        "  %s\n\tNow you have %d Tasks in the list\n",
-                        currentTask.toString(),
-                        lst.size())
-                        + "\t--------------------------------------------"
-        );
-    }
-    /*
-    Error Message to display when format is wrong
-     */
-    public void showFormatErrorMessage() {
-        System.out.println("\tWrong Date time format, it should be yyyy-mm-dd HHmm" +
-                "\n For example : 2019-08-29 1800");
-    }
 
-    /*
-    Lists out tasks in the list
+    /**
+     * Returns a standard separator line.
+     *
+     * @return formatted separator line
      */
-    public static void listOut(List<Task> lst) throws HolidayException {
-        Iterator<Task> iList = lst.iterator();
-        int n = 1;
-        if (lst.size() == 0) {
-            throw new HolidayException("List is empty!!");
-        } else {
-            System.out.println("\t--------------------------------------------\n"
-                    + "\tHere are the tasks in your list:");
-            while(iList.hasNext()) {
-                Task currentTask = iList.next();
-                System.out.printf("\t%d.%s\n",n, currentTask.toString());
-                n++;
-            }
-            System.out.println("\t--------------------------------------------");
-        }
-
-    }
-
-    /*
-    Mark the indexed task in the TaskList iList as done
-     */
-
-
-    /*
-    Display delete message when deleted specified Task
-     */
-    public static void deleteTaskMessage(List<Task> iList, Task removedTask) {
-        System.out.println("\t--------------------------------------------\n"
-                + "\t Noted. I've removed this task:");
-        System.out.printf("\t %s\n\tNow you have %d Tasks Remaining\n",
-                removedTask.toString(),
-                iList.size()
-        );
-        System.out.println("\t--------------------------------------------");
-    }
-
-    /*
-    Displays tasks matching the keyword
-     */
-    public void showMatchingTasks(TaskList matches) {
-
-        if (matches.size() > 0) {
-            System.out.println("\t--------------------------------------------");
-            System.out.println("\tHere are the matching tasks in your list:");
-
-            for (int i = 1; i < matches.size() + 1; i++) {
-                System.out.printf("\t%d.%s\n",i, matches.get(i));
-            }
-
-            System.out.println("\t--------------------------------------------");
-        } else {
-            System.out.println("\t--------------------------------------------");
-            System.out.println("\t There are no Tasks Matching this keyword");
-            System.out.println("\t--------------------------------------------");
-        }
-    }
     private String line() {
         return "\t--------------------------------------------\n";
     }
 
+    /**
+     * Returns a formatted error message.
+     *
+     * @param msg error message text
+     * @return formatted error output
+     */
     public String getErrorMessage(String msg) {
         return line()
                 + "\t" + msg + "\n"
                 + line();
     }
 
+    /**
+     * Returns a message describing the correct date-time format.
+     *
+     * @return date-time format error message
+     */
     public String getFormatErrorMessage() {
         return "\tWrong Date time format, it should be yyyy-mm-dd HHmm\n"
                 + "\tFor example : 2019-08-29 1800";
     }
 
+    /**
+     * Returns a confirmation message when a task is added.
+     *
+     * @param lst current task list
+     * @param currentTask task that was added
+     * @return formatted add task message
+     */
     public String getAddTaskMessage(List<Task> lst, Task currentTask) {
         return line()
                 + "\tGot it. I've added this task:\n"
@@ -162,6 +91,13 @@ public class Ui {
                 + line();
     }
 
+    /**
+     * Returns the formatted list of tasks.
+     *
+     * @param lst list of tasks
+     * @return formatted task list
+     * @throws HolidayException if the list is empty
+     */
     public String getListMessage(List<Task> lst) throws HolidayException {
         if (lst.isEmpty()) {
             throw new HolidayException("List is empty!!");
@@ -180,6 +116,13 @@ public class Ui {
         return sb.toString();
     }
 
+    /**
+     * Returns a message confirming a task has been marked as done.
+     *
+     * @param lst task list
+     * @param index index of the task marked
+     * @return formatted mark confirmation message
+     */
     public String getMarkMessage(List<Task> lst, int index) {
         Task task = lst.get(index - 1);
         return line()
@@ -188,6 +131,13 @@ public class Ui {
                 + line();
     }
 
+    /**
+     * Returns a message confirming a task has been unmarked.
+     *
+     * @param lst task list
+     * @param index index of the task unmarked
+     * @return formatted unmark confirmation message
+     */
     public String getUnmarkMessage(List<Task> lst, int index) {
         Task task = lst.get(index - 1);
         return line()
@@ -196,6 +146,13 @@ public class Ui {
                 + line();
     }
 
+    /**
+     * Returns a confirmation message when a task is deleted.
+     *
+     * @param lst updated task list
+     * @param removedTask task that was removed
+     * @return formatted delete confirmation
+     */
     public String getDeleteTaskMessage(List<Task> lst, Task removedTask) {
         return line()
                 + "\tNoted. I've removed this task:\n"
@@ -204,6 +161,12 @@ public class Ui {
                 + line();
     }
 
+    /**
+     * Returns tasks matching a keyword search.
+     *
+     * @param matches TaskList containing matched tasks
+     * @return formatted matching tasks output
+     */
     public String getMatchingTasksMessage(TaskList matches) {
         StringBuilder sb = new StringBuilder();
         sb.append(line());
@@ -220,6 +183,4 @@ public class Ui {
         sb.append(line());
         return sb.toString();
     }
-
-
 }
