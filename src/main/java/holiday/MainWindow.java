@@ -3,7 +3,6 @@ package holiday;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.util.Duration;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -11,8 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
- * Controller for the main GUI.
+ * Controller for the main GUI window.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -29,25 +29,29 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/drake.png"));
     private Image holidayChadImage = new Image(this.getClass().getResourceAsStream("/images/Gigachad.jpg"));
 
+    /**
+     * Initializes GUI components and displays the welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(new Ui().getWelcomeMessage(), holidayChadImage)
         );
-
     }
 
     /**
-     * Injects the Holiday instance
+     * Injects the Holiday chatbot instance.
+     *
+     * @param holiday chatbot instance
      */
     public void setHoliday(Holiday holiday) {
         this.holiday = holiday;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Handles user input, displays the chatbot response,
+     * and exits the application when "bye" is entered.
      */
     @FXML
     private void handleUserInput() {
@@ -67,4 +71,3 @@ public class MainWindow extends AnchorPane {
         }
     }
 }
-

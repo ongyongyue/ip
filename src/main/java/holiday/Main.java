@@ -1,6 +1,6 @@
 package holiday;
-import java.io.IOException;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,12 +8,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * JavaFX entry point for the Holiday chatbot GUI.
  */
 public class Main extends Application {
 
     private Holiday holidayBot = new Holiday();
 
+    /**
+     * Starts the JavaFX GUI.
+     *
+     * @param stage primary application stage
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -21,7 +26,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setHoliday(holidayBot);  // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().setHoliday(holidayBot);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

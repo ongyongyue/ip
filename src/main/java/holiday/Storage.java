@@ -2,13 +2,13 @@ package holiday;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles reading and writing tasks to the data file.
+ */
 public class Storage {
     private final Path filePath;
 
@@ -20,8 +20,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    /*
-    This function reads the saved .txt file and reinitializes any saved Tasks into Task instances
+    /**
+     * Loads tasks from the data file.
+     *
+     * @return list of tasks loaded from file
+     * @throws IOException if file reading fails
      */
     public List<Task> loadTasksFromFile() throws IOException {
         ensureDataFileExists();
@@ -46,21 +49,26 @@ public class Storage {
         return tasks;
     }
 
-    /*
-    Turn Tasks into txt form and save it into a txt file
+    /**
+     * Saves tasks to the data file.
+     *
+     * @param tasks list of tasks to save
+     * @throws IOException if file writing fails
      */
     public void saveTasksToFile(List<Task> tasks) throws IOException {
         ensureDataFileExists();
         List<String> lines = new ArrayList<>();
         for (Task t : tasks) {
-            lines.add(t.toFileString()); // you will add this method in Task
+            lines.add(t.toFileString());
         }
         Files.write(this.filePath, lines, StandardCharsets.UTF_8,
                 StandardOpenOption.TRUNCATE_EXISTING);
     }
 
-    /*
-    Check if the data file exits, if it doesn't create the file and data directory
+    /**
+     * Ensures the data directory and file exist.
+     *
+     * @throws IOException if file creation fails
      */
     private void ensureDataFileExists() throws IOException {
         Path dir = filePath.getParent();
@@ -71,6 +79,4 @@ public class Storage {
             Files.createFile(filePath);
         }
     }
-
-
 }
