@@ -18,18 +18,18 @@ public class DeleteCommand extends Command {
     /**
      * Removes the specified task and returns confirmation.
      *
-     * @param tasks current task list
+     * @param taskList current task list
      * @param ui user interface handler
      * @param storage storage handler
      * @return confirmation message
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws HolidayException {
-        if (tasks.size() == 0) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws HolidayException {
+        if (taskList.size() == 0) {
             throw new HolidayException("List is empty, nothing to delete!");
-        } else if (taskIdx > tasks.size()) {
+        } else if (taskIdx > taskList.size()) {
             throw new HolidayException("Index does not exist");
         }
-        Task removedTask = tasks.remove(taskIdx);
-        return ui.getDeleteTaskMessage(tasks.getTasks(), removedTask);
+        Task removedTask = taskList.remove(taskIdx);
+        return ui.getDeleteTaskMessage(taskList.getTasks(), removedTask);
     }
 }

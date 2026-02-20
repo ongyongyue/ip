@@ -25,7 +25,12 @@ public class MarkCommand extends Command {
      * @return confirmation message
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws HolidayException {
+        if (taskList.size() == 0) {
+            throw new HolidayException("List is empty, nothing to mark!");
+        } else if (taskIdx > taskList.size()) {
+            throw new HolidayException("Index does not exist");
+        }
         Task markedTask = Task.mark(taskList.getTasks(), taskIdx);
         return ui.getMarkMessage(taskList.getTasks(), taskIdx);
     }

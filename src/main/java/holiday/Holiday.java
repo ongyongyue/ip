@@ -49,6 +49,15 @@ public class Holiday {
     }
 
     /**
+     * Throws an exception if list is empty
+     *
+     */
+    public void isEmptyList() throws HolidayException{
+        if(this.lst.getTasks().isEmpty()) {
+            throw new HolidayException("List is empty!!");
+        }
+    }
+    /**
      * Optional CLI entry point.
      *
      * @param args command line arguments
