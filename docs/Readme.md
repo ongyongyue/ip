@@ -44,6 +44,16 @@ data/holiday.txt
 💬 Commands
 ```
 Note: Commands are case-insensitive. Extra spaces are ignored.
+Possible commands are
+todo: Add a todo task
+deadline: Add a task with a deadline date and time
+event: Add a task with a start and end date time
+list: List out current tasks in our list
+mark: Mark the indexed task as done
+unmark: Unmark the indexed task as not done
+delete: Deletes the indexed task from the list
+find: Find a task by keyword
+bye: Closes the application
 ```
 ➕ Add a Todo
 
